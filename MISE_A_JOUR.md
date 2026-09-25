@@ -43,7 +43,9 @@ Garder le format existant (un objet par ligne) pour des historiques lisibles.
 5. Lancer `python scripts/valider.py`. S'il échoue, corriger. S'il échoue encore, annuler les modifications et ne rien publier.
 6. Lancer `python scripts/photos.py` : ajoute une photo sous licence libre (Wikimedia Commons, avec crédit) aux nouveaux candidats. Ne jamais ajouter de photo à la main depuis un autre site (droits d'auteur). S'il échoue (réseau), continuer sans photo.
 7. Lancer `python scripts/generer_pages.py` (régénère les pages `candidats/<id>/`) puis `python scripts/generer_sitemap.py` pour mettre à jour `sitemap.xml` (nouveaux candidats, date).
-8. Ajouter une ligne en tête de `JOURNAL.md` : date, résumé des changements (ou « aucun changement »).
-9. Commit avec un message du type `Mise à jour du JJ/MM/AAAA : +2 déclarations, statut de X` puis push sur la branche principale.
+8. Ajouter une ligne en tête de `JOURNAL.md` : date et résumé des changements.
+9. Faire **un seul commit** regroupant tout (message du type `Mise à jour du JJ/MM/AAAA : +2 déclarations, statut de X`), puis **un seul push** sur la branche principale. Relire avant de pousser : une correction poussée ensuite coûte une mise en ligne de plus.
 
-S'il n'y a rien de nouveau et de fiable : ne pas modifier les données, seulement noter « aucun changement » dans le journal.
+S'il n'y a rien de nouveau et de fiable : ne rien modifier, **ne rien committer et ne rien pousser** (pas même le journal). Vérifier avec `git status` qu'aucun fichier n'a changé.
+
+Pourquoi : chaque mise en ligne en production coûte 15 crédits Netlify, sur 300 par mois en forfait gratuit ; une fois les crédits épuisés, le site est coupé jusqu'au mois suivant. Le fichier `netlify.toml` annule déjà la mise en ligne quand seuls `JOURNAL.md`, `MISE_A_JOUR.md`, `CLAUDE.md`, `README.md` ou `scripts/` ont changé, mais mieux vaut ne pas pousser du tout.

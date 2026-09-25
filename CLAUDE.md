@@ -38,6 +38,12 @@ Le détail est dans `MISE_A_JOUR.md`, qui sert aussi de consigne à la mise à j
 
 Une routine cloud Claude (tous les jours à 7 h, heure de Paris) suit `MISE_A_JOUR.md` : recherche d'actualité, mise à jour de `data.json`, scripts ci-dessus, entrée dans `JOURNAL.md`, push sur `main`.
 Avant de modifier les données à la main, faire `git pull` pour récupérer ses derniers changements.
+
+## Crédits Netlify (forfait gratuit : 300 crédits par mois, renouvelés le 25)
+
+Chaque mise en ligne en production (push sur `main` qui modifie le site) coûte 15 crédits ; la bande passante coûte 20 crédits par Go. Crédits épuisés = site coupé jusqu'au mois suivant.
+Donc : regrouper les changements en un seul push, ne jamais pousser pour rien. `netlify.toml` annule la mise en ligne quand seuls des fichiers internes changent (journal, consignes, scripts). Les aperçus de branche et de pull request sont gratuits.
+Le propriétaire envisagera un forfait payant (Personal, 9 $/mois, 1 000 crédits) à 80 % de consommation.
 Relire de temps en temps ses ajouts : erreurs déjà vues = citation au discours indirect, étiquette de parti approximative.
 
 ## Référencement et mesure
