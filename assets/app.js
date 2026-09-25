@@ -157,7 +157,7 @@ function main(D) {
         <blockquote class="quiz-quote">${esc(d.texte)}</blockquote>
         <p class="decl-meta quiz-when">${fmtDate(d.date)}</p>
         <div class="quiz-choices">
-          ${choix.map((c) => `<button class="quiz-choice" data-id="${esc(c.id)}" style="--c:${esc(c.couleur)}">${avatar(c)}<span>${esc(c.nom)}</span></button>`).join("")}
+          ${choix.map((c, i) => `<button class="quiz-choice" data-id="${esc(c.id)}" style="--c:${esc(c.couleur)}"><span class="qp-letter">${"ABCD"[i]}</span>${avatar(c)}<span>${esc(c.nom)}</span></button>`).join("")}
         </div>
         <div id="quiz-feedback"></div>`;
       $("#quiz").querySelectorAll(".quiz-choice").forEach((b) => b.addEventListener("click", () => answer(b.dataset.id)));
@@ -239,7 +239,7 @@ function main(D) {
         <div class="quiz-bar"><span style="width:${(idx / questions.length) * 100}%"></span></div>
         <h2 class="qp-question">${esc(q.question)}</h2>
         <div class="qp-options">
-          ${q.options.map((o, i) => `<button class="qp-option" data-i="${i}">${esc(o.texte)}</button>`).join("")}
+          ${q.options.map((o, i) => `<button class="qp-option" data-i="${i}"><span class="qp-letter">${"ABCDEFGH"[i]}</span><span>${esc(o.texte)}</span></button>`).join("")}
           <button class="qp-option qp-skip" data-i="-1">Je ne sais pas / sans avis</button>
         </div>`;
       $("#qp").querySelectorAll(".qp-option").forEach((b) => b.addEventListener("click", () => {
