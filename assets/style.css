@@ -304,3 +304,10 @@ select.chip { appearance: auto; }
   .countdown .num { font-size: 1.5rem; }
   .nav a { padding: 6px 10px; font-size: .9rem; }
 }
+
+/* ===== S'inscrire et voter ===== */
+.vote-alert { border-left: 6px solid var(--brand-2); margin-bottom: 24px; }
+.vote-alert p { margin: 6px 0 0; }
+.vote-steps { list-style: none; padding: 0; margin: 0 0 24px; display: grid; gap: 16px; }
+.vote-steps h2 { margin: 0 0 8px; font-size: 1.25rem; }
+.vote-steps p, .vote-steps ul { margin: 8px 0; }

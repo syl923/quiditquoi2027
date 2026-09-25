@@ -31,7 +31,8 @@ function main(D) {
     ["/comparateur.html", "Comparateur", "comparateur"],
     ["/qui-a-dit-ca.html", "Qui a dit ça ?", "quiz"],
     ["/quel-parti.html", "Quel parti ?", "quizpartis"],
-    ["/calendrier.html", "Calendrier", "calendrier"]
+    ["/calendrier.html", "Calendrier", "calendrier"],
+    ["/voter.html", "S'inscrire", "voter"]
   ];
 
   function renderLayout() {

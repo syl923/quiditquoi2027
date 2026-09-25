@@ -11,7 +11,7 @@ maj = D["majLe"]
 
 pages = [("", "daily", "1.0"), ("programmes.html", "daily", "0.9"), ("candidats.html", "daily", "0.9"),
          ("declarations.html", "daily", "0.8"), ("comparateur.html", "daily", "0.8"), ("qui-a-dit-ca.html", "daily", "0.8"), ("quel-parti.html", "weekly", "0.8"),
-         ("calendrier.html", "weekly", "0.6"), ("a-propos.html", "monthly", "0.3")]
+         ("calendrier.html", "weekly", "0.6"), ("voter.html", "monthly", "0.7"), ("a-propos.html", "monthly", "0.3")]
 urls = [(f"{BASE}/{p}", f, pr) for p, f, pr in pages]
 urls += [(f"{BASE}/candidats/{quote(c['id'])}/", "daily", "0.8") for c in D["candidats"]]
 
