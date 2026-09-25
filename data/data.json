@@ -24,7 +24,10 @@
     "lcpPhilippeEcole": {"titre":"LCP — Ce que propose Édouard Philippe pour l'école","url":"https://lcp.fr/actualites/presidentielle-salaires-des-enseignants-sanctions-pour-les-parents-ce-que-propose"},
     "lcpTondelierGrenoble": {"titre":"LCP — À Grenoble, Marine Tondelier adresse un message à la gauche","url":"https://lcp.fr/actualites/presidentielle-2027-a-grenoble-l-ecologiste-marine-tondelier-adresse-un-message-a-la"},
     "wikiBecht": {"titre":"Wikipédia — Olivier Becht (candidature à la présidentielle de 2027)","url":"https://fr.wikipedia.org/wiki/Olivier_Becht"},
-    "lcpPrimaireGaucheOppose": {"titre":"LCP — Primaire de gauche : ce qui oppose Glucksmann, Faure, Royal, Guedj et Maurel (24/09/2026)","url":"https://lcp.fr/actualites/primaire-de-gauche-ce-qui-oppose-glucksmann-faure-royal-guedj-et-maurel-442266"}
+    "lcpPrimaireGaucheOppose": {"titre":"LCP — Primaire de gauche : ce qui oppose Glucksmann, Faure, Royal, Guedj et Maurel (24/09/2026)","url":"https://lcp.fr/actualites/primaire-de-gauche-ce-qui-oppose-glucksmann-faure-royal-guedj-et-maurel-442266"},
+    "lcpRousselHuma": {"titre":"LCP — À la Fête de l'Huma, Fabien Roussel au défi de prouver l'utilité d'une candidature communiste (11/09/2026)","url":"https://lcp.fr/actualites/presidentielle-a-la-fete-de-l-huma-fabien-roussel-au-defi-de-prouver-l-utilite-d-une"},
+    "psRetailleauConstitution": {"titre":"Public Sénat — Bruno Retailleau veut « renverser la table » avec une profonde réforme constitutionnelle (03/09/2026)","url":"https://www.publicsenat.fr/actualites/politique/presidentielle-2027-bruno-retailleau-veut-renverser-la-table-avec-une-profonde-reforme-constitutionnelle"},
+    "lcpPhilippeMayotte": {"titre":"LCP — Mayotte : pour Édouard Philippe, « l'urgence est de fermer les vannes de l'immigration » (20/08/2026)","url":"https://lcp.fr/actualites/mayotte-pour-edouard-philippe-l-urgence-est-de-fermer-les-vannes-de-l-immigration-440519"}
   },
   "election": {
     "premierTour": "2027-04-18",
@@ -84,7 +87,8 @@
     {"candidat":"jean-luc-melenchon","date":"2026-05-03","theme":"campagne","texte":"Oui, je suis candidat","contexte":"Journal de 20 h de TF1","source":"rtsMelenchon"},
     {"candidat":"jean-luc-melenchon","date":"2026-05-03","theme":"campagne","texte":"Nous c'est carré. Il y a une équipe, un programme, un seul candidat","contexte":"Journal de 20 h de TF1","source":"rtsMelenchon"},
     {"candidat":"raphael-glucksmann","date":"2026-09-17","theme":"campagne","texte":"Il n'y aura pas de place pour LFI dans mon gouvernement","contexte":"Alors que s'engage la primaire socialiste et de Place publique, rapporté par LCP","source":"lcpPrimaireGaucheOppose"},
-    {"candidat":"jean-luc-melenchon","date":"2026-09-24","theme":"social","texte":"Les Gilets jaunes, c'est calme à côté de ce qui vous attend","contexte":"Entretien à Playbook Paris, sur la hausse des prix des carburants, rapporté par Public Sénat","source":"psTroisManieres"}
+    {"candidat":"jean-luc-melenchon","date":"2026-09-24","theme":"social","texte":"Les Gilets jaunes, c'est calme à côté de ce qui vous attend","contexte":"Entretien à Playbook Paris, sur la hausse des prix des carburants, rapporté par Public Sénat","source":"psTroisManieres"},
+    {"candidat":"edouard-philippe","date":"2026-08-20","theme":"immigration","texte":"l'urgence est de fermer les vannes de l'immigration","contexte":"Sur la situation à Mayotte, rapporté par LCP","source":"lcpPhilippeMayotte"}
   ],
   "positions": [
     {"candidat":"jean-luc-melenchon","theme":"social","resume":"Retraite à 60 ans avec 40 années de cotisation.","source":"lcpRetraites"},
@@ -120,7 +124,11 @@
     {"candidat":"raphael-glucksmann","theme":"ecologie","resume":"« 100 jours de la révolution écologique » : sortie du gaz et du pétrole, rénovation des bâtiments, production française de panneaux solaires. Favorable à de nouveaux EPR.","source":"lcpGlucksmann"},
     {"candidat":"raphael-glucksmann","theme":"social","resume":"Abroger la réforme des retraites de 2023 et la reconstruire selon la pénibilité. Baisse de la CSG financée par une hausse des droits de succession sur les gros héritages.","source":"lcpMedef"},
     {"candidat":"raphael-glucksmann","theme":"finances","resume":"Réduire la dette par des économies et une taxation accrue des hauts patrimoines.","source":"psMedef"},
-    {"candidat":"raphael-glucksmann","theme":"international","resume":"Ligne la plus ferme à gauche face à la Russie : hausse de l'aide militaire à l'Ukraine et protection de son espace aérien.","source":"psPrimaireGauche"}
+    {"candidat":"raphael-glucksmann","theme":"international","resume":"Ligne la plus ferme à gauche face à la Russie : hausse de l'aide militaire à l'Ukraine et protection de son espace aérien.","source":"psPrimaireGauche"},
+    {"candidat":"fabien-roussel","theme":"international","resume":"Obtenir rapidement un cessez-le-feu en Ukraine par la voie diplomatique, et réorienter une partie des dépenses militaires vers les services publics.","source":"lcpRousselHuma"},
+    {"candidat":"fabien-roussel","theme":"finances","resume":"Exiger de TotalEnergies une baisse de 30 à 50 centimes du litre de carburant, sous peine de « nationalisation-sanction ».","source":"lcpRousselHuma"},
+    {"candidat":"bruno-retailleau","theme":"immigration","resume":"Référendums possibles sur l'immigration, la sécurité et la justice (réforme de l'article 11), plafonds migratoires et « bouclier constitutionnel » donnant la primauté au droit français sur le droit européen dans ces domaines.","source":"psRetailleauConstitution"},
+    {"candidat":"edouard-philippe","theme":"immigration","resume":"À Mayotte : suspension des nouvelles demandes d'asile et moratoire sur toutes les voies d'immigration pendant le quinquennat, suspension du droit du sol pendant plusieurs années.","source":"lcpPhilippeMayotte"}
   ],
   "calendrier": [
     {"date":"2026-08-27","titre":"Premier débat entre candidats","description":"Sept candidats débattent devant le Medef, à Roland-Garros.","confirme":true,"source":"psMedef"},

@@ -258,6 +258,40 @@ function main(D) {
         .sort((a, b) => b.pct - a.pct || b.accord - a.accord);
     }
 
+    // Camembert (anneau) : part de chaque parti dans l'ensemble de vos réponses en commun.
+    // 5 partis au maximum + « Autres », pour rester lisible.
+    function donut(r) {
+      const avec = r.filter((x) => x.accord > 0).sort((a, b) => b.accord - a.accord);
+      const total = avec.reduce((t, x) => t + x.accord, 0);
+      if (!total) return "";
+      let parts = avec.slice(0, 5).map((x) => ({ label: x.c.parti, sub: x.c.nom, n: x.accord, color: x.c.couleur }));
+      const reste = avec.slice(5).reduce((t, x) => t + x.accord, 0);
+      if (reste) parts.push({ label: "Autres partis", sub: "", n: reste, color: "#9ca3af" });
+      const R = 70, C = 2 * Math.PI * R, GAP = parts.length > 1 ? 3 : 0;
+      let offset = 0;
+      const arcs = parts.map((pt) => {
+        const len = (pt.n / total) * C;
+        const pct = Math.round((pt.n / total) * 100);
+        const seg = `<circle class="qp-seg" r="${R}" cx="90" cy="90" fill="none" stroke="${esc(pt.color)}" stroke-width="34"
+          stroke-dasharray="${Math.max(len - GAP, 0.1)} ${C}" stroke-dashoffset="${-offset}" transform="rotate(-90 90 90)">
+          <title>${esc(pt.label)} : ${pct} % de vos réponses en commun</title></circle>`;
+        offset += len;
+        pt.pct = pct;
+        return seg;
+      }).join("");
+      return `
+        <div class="qp-donut">
+          <svg viewBox="0 0 180 180" role="img" aria-label="Répartition de vos réponses en commun par parti">
+            ${arcs}
+            <text x="90" y="86" text-anchor="middle" class="qp-donut-big">${total}</text>
+            <text x="90" y="106" text-anchor="middle" class="qp-donut-small">points communs</text>
+          </svg>
+          <ul class="qp-legend">
+            ${parts.map((pt) => `<li><span class="qp-swatch" style="background:${esc(pt.color)}"></span><span><strong>${esc(pt.label)}</strong>${pt.sub ? ` <span class="decl-meta">${esc(pt.sub)}</span>` : ""}</span><strong class="qp-legend-pct">${pt.pct} %</strong></li>`).join("")}
+          </ul>
+        </div>`;
+    }
+
     function end() {
       const r = scores();
       if (!r.length) {
@@ -276,7 +310,11 @@ function main(D) {
             <div><div class="quiz-score">${top.pct}<small> %</small></div><h2>${esc(top.c.parti)}</h2><p>${esc(top.c.nom)}</p></div>
           </div>
         </div>
+        <h3>La répartition de vos réponses</h3>
+        <p class="decl-meta">Chaque fois qu'une de vos réponses correspond à la position d'un parti, il marque un point commun. Voici leur répartition.</p>
+        ${donut(r)}
         <h3>Votre proximité avec chaque parti</h3>
+        <p class="decl-meta">Pourcentage de réponses en commun, calculé uniquement sur les questions où la position du parti est connue.</p>
         <div class="qp-bars">
           ${r.map((x) => `
             <a class="qp-bar" href="${candUrl(x.c)}" style="--c:${esc(x.c.couleur)}">
@@ -295,7 +333,7 @@ function main(D) {
           <button class="btn btn-ghost" id="qp-again">Recommencer</button>
         </div>
         <p class="decl-meta" id="qp-copied"></p>
-        <div class="qp-warning">⚠️ <strong>Rappel</strong> : ce quiz est un <strong>divertissement</strong>. Il repose sur 10 questions simplifiées et sur les seules positions que nous avons pu sourcer ; certains partis n'y sont présents que sur 2 ou 3 questions. <strong>Ce n'est ni un sondage ni une consigne de vote</strong> : pour vous faire une idée, lisez les <a href="/programmes.html">programmes complets</a>.</div>
+        <div class="qp-warning">⚠️ <strong>Rappel</strong> : ce quiz est un <strong>divertissement</strong>. Il repose sur 15 questions simplifiées et sur les seules positions que nous avons pu sourcer ; certains partis n'y sont présents que sur 3 ou 4 questions. <strong>Ce n'est ni un sondage ni une consigne de vote</strong> : pour vous faire une idée, lisez les <a href="/programmes.html">programmes complets</a>.</div>
         <details class="qp-details"><summary>D'où viennent les positions utilisées ?</summary>
           ${questions.map((q) => `<div class="qp-src"><strong>${esc(q.question)}</strong><ul>${q.options.filter((o) => o.candidats.length).map((o) => `<li>${esc(o.texte)} → ${o.candidats.map((cid) => esc(candById(cid)?.parti || cid)).join(", ")} · ${o.sources.map(srcLink).join(", ")}</li>`).join("")}</ul></div>`).join("")}
         </details>`;

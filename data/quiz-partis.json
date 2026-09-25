@@ -1,57 +1,462 @@
 {
-  "note": "Quiz de divertissement. Chaque réponse liste les candidats (clés de data.json) dont une position sourcée correspond, avec les clés de source. Une réponse sans candidat est possible. Seuls des candidats ayant une position sourcée sur au moins 2 questions apparaissent dans le résultat.",
-  "minQuestions": 2,
-  "questions": [
-    {"id":"retraites","question":"Retraites : que faut-il faire de l'âge de départ ?","options":[
-      {"texte":"Revenir à 60 ans, avec 40 années de cotisation","candidats":["jean-luc-melenchon"],"sources":["lcpRetraites"]},
-      {"texte":"Revenir sur la réforme de 2023 (62 ans), avec des départs plus tôt pour les carrières longues ou pénibles","candidats":["marine-le-pen","marine-tondelier","raphael-glucksmann"],"sources":["lcpRetraites","lcpMedef"]},
-      {"texte":"Aller au-delà de 64 ans, en fonction de l'espérance de vie","candidats":["bruno-retailleau"],"sources":["lcpRetraites"]},
-      {"texte":"Supprimer l'âge légal : seule la durée de cotisation compte","candidats":["gabriel-attal"],"sources":["lcpRetraites"]}
-    ]},
-    {"id":"dette","question":"Dette publique : quelle est la priorité ?","options":[
-      {"texte":"Annuler la part de la dette détenue par la Banque centrale européenne","candidats":["jean-luc-melenchon"],"sources":["psMedef"]},
-      {"texte":"Faire de fortes économies sur les dépenses de l'État","candidats":["gabriel-attal","bruno-retailleau","marine-le-pen","eric-zemmour"],"sources":["psTroisManieres","psMedef","cnewsZemmourRobots"]},
-      {"texte":"Faire des économies, mais aussi taxer davantage les gros patrimoines et héritages","candidats":["raphael-glucksmann"],"sources":["psMedef","lcpMedef"]},
-      {"texte":"Traquer d'abord la fraude fiscale, sans faire payer les retraités et les malades","candidats":["fabien-roussel"],"sources":["lcpRoussel"]}
-    ]},
-    {"id":"fonctionnaires","question":"Le nombre de fonctionnaires…","options":[
-      {"texte":"Doit baisser fortement (plusieurs centaines de milliers de postes)","candidats":["bruno-retailleau","eric-zemmour"],"sources":["psMedef","cnewsZemmourRobots"]},
-      {"texte":"Peut baisser modérément, par des départs volontaires","candidats":["gabriel-attal"],"sources":["psTroisManieres"]},
-      {"texte":"Doit être maintenu, voire augmenté dans certains services","candidats":[],"sources":[]}
-    ]},
-    {"id":"ukraine","question":"Guerre en Ukraine : que doit faire la France ?","options":[
-      {"texte":"Renforcer l'aide militaire à l'Ukraine","candidats":["gabriel-attal","raphael-glucksmann"],"sources":["psTroisManieres","psPrimaireGauche"]},
-      {"texte":"Continuer à former ses soldats, mais arrêter l'aide financière et miser sur la diplomatie","candidats":["marine-le-pen"],"sources":["psTroisManieres"]},
-      {"texte":"Chercher la paix par la négociation, et sortir de l'OTAN","candidats":["jean-luc-melenchon"],"sources":["psTroisManieres"]}
-    ]},
-    {"id":"europe","question":"L'Union européenne, vous la voulez…","options":[
-      {"texte":"Plus forte : une Europe « puissance », face aux grands continents","candidats":["gabriel-attal"],"sources":["psTroisManieres"]},
-      {"texte":"Moins coûteuse : réduire la contribution de la France au budget européen","candidats":["marine-le-pen"],"sources":["psMedef"]},
-      {"texte":"Moins contraignante : désobéir aux règles européennes contraires à nos intérêts","candidats":["jean-luc-melenchon"],"sources":["lcpMedef"]}
-    ]},
-    {"id":"energie","question":"Énergie et climat : votre priorité ?","options":[
-      {"texte":"Tout miser sur le nucléaire et arrêter les éoliennes","candidats":["marine-le-pen"],"sources":["psLePenEnergie2022"]},
-      {"texte":"Sortir du gaz et du pétrole : rénovation, solaire made in France et nouveaux réacteurs","candidats":["raphael-glucksmann"],"sources":["lcpGlucksmann"]},
-      {"texte":"Un plan climat avec une trajectoire carbone, lié à la réindustrialisation","candidats":["fabien-roussel"],"sources":["lcpRoussel"]},
-      {"texte":"L'écologie avant tout, même si elle a un coût pour les entreprises","candidats":["marine-tondelier"],"sources":["psMedef"]}
-    ]},
-    {"id":"salaires","question":"Pouvoir d'achat : comment gagner plus ?","options":[
-      {"texte":"Porter le SMIC à 2 000 € brut, avec des aides aux PME","candidats":["marine-tondelier"],"sources":["lcpMedef"]},
-      {"texte":"Augmenter les salaires pour tout le monde","candidats":["jean-luc-melenchon","fabien-roussel"],"sources":["lcpMedef","lcpRoussel"]},
-      {"texte":"Alléger les impôts des entreprises et travailler plus","candidats":["edouard-philippe"],"sources":["psMedef"]}
-    ]},
-    {"id":"carburants","question":"Prix des carburants : que faire ?","options":[
-      {"texte":"Bloquer le prix à 1,70 € le litre et encadrer les marges des pétroliers","candidats":["jean-luc-melenchon"],"sources":["psTroisManieres"]},
-      {"texte":"Baisser la TVA sur les carburants","candidats":["marine-le-pen"],"sources":["psTroisManieres"]},
-      {"texte":"Laisser faire le marché","candidats":[],"sources":[]}
-    ]},
-    {"id":"ecole","question":"École : quelle mesure vous parle le plus ?","options":[
-      {"texte":"Mieux payer les enseignants et donner plus d'autonomie aux établissements","candidats":["edouard-philippe"],"sources":["lcpPhilippeEcole"]},
-      {"texte":"Autre chose, ou aucune de ces priorités","candidats":[],"sources":[]}
-    ]},
-    {"id":"immigration","question":"Immigration : faut-il expulser les étrangers au chômage depuis longtemps, même en situation régulière ?","options":[
-      {"texte":"Oui","candidats":["eric-zemmour"],"sources":["cnewsZemmourRobots"]},
-      {"texte":"Non","candidats":[],"sources":[]}
-    ]}
-  ]
+ "note": "Quiz de divertissement. Chaque réponse liste les candidats (clés de data.json) dont une position sourcée correspond, avec les clés de source. Une réponse sans candidat est possible. Seuls des candidats ayant une position sourcée sur au moins 3 questions apparaissent dans le résultat.",
+ "minQuestions": 3,
+ "questions": [
+  {
+   "id": "retraites",
+   "question": "Retraites : que faut-il faire de l'âge de départ ?",
+   "options": [
+    {
+     "texte": "Revenir à 60 ans, avec 40 années de cotisation",
+     "candidats": [
+      "jean-luc-melenchon"
+     ],
+     "sources": [
+      "lcpRetraites"
+     ]
+    },
+    {
+     "texte": "Revenir sur la réforme de 2023 (62 ans), avec des départs plus tôt pour les carrières longues ou pénibles",
+     "candidats": [
+      "marine-le-pen",
+      "marine-tondelier",
+      "raphael-glucksmann"
+     ],
+     "sources": [
+      "lcpRetraites",
+      "lcpMedef"
+     ]
+    },
+    {
+     "texte": "Aller au-delà de 64 ans, en fonction de l'espérance de vie",
+     "candidats": [
+      "bruno-retailleau"
+     ],
+     "sources": [
+      "lcpRetraites"
+     ]
+    },
+    {
+     "texte": "Supprimer l'âge légal : seule la durée de cotisation compte",
+     "candidats": [
+      "gabriel-attal"
+     ],
+     "sources": [
+      "lcpRetraites"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "dette",
+   "question": "Dette publique : quelle est la priorité ?",
+   "options": [
+    {
+     "texte": "Annuler la part de la dette détenue par la Banque centrale européenne",
+     "candidats": [
+      "jean-luc-melenchon"
+     ],
+     "sources": [
+      "psMedef"
+     ]
+    },
+    {
+     "texte": "Faire de fortes économies sur les dépenses de l'État",
+     "candidats": [
+      "gabriel-attal",
+      "bruno-retailleau",
+      "marine-le-pen",
+      "eric-zemmour"
+     ],
+     "sources": [
+      "psTroisManieres",
+      "psMedef",
+      "cnewsZemmourRobots"
+     ]
+    },
+    {
+     "texte": "Faire des économies, mais aussi taxer davantage les gros patrimoines et héritages",
+     "candidats": [
+      "raphael-glucksmann"
+     ],
+     "sources": [
+      "psMedef",
+      "lcpMedef"
+     ]
+    },
+    {
+     "texte": "Traquer d'abord la fraude fiscale, sans faire payer les retraités et les malades",
+     "candidats": [
+      "fabien-roussel"
+     ],
+     "sources": [
+      "lcpRoussel"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "fonctionnaires",
+   "question": "Le nombre de fonctionnaires…",
+   "options": [
+    {
+     "texte": "Doit baisser fortement (plusieurs centaines de milliers de postes)",
+     "candidats": [
+      "bruno-retailleau",
+      "eric-zemmour"
+     ],
+     "sources": [
+      "psMedef",
+      "cnewsZemmourRobots"
+     ]
+    },
+    {
+     "texte": "Peut baisser modérément, par des départs volontaires",
+     "candidats": [
+      "gabriel-attal"
+     ],
+     "sources": [
+      "psTroisManieres"
+     ]
+    },
+    {
+     "texte": "Doit être maintenu, voire augmenté dans certains services",
+     "candidats": [],
+     "sources": []
+    }
+   ]
+  },
+  {
+   "id": "ukraine",
+   "question": "Guerre en Ukraine : que doit faire la France ?",
+   "options": [
+    {
+     "texte": "Renforcer l'aide militaire à l'Ukraine",
+     "candidats": [
+      "gabriel-attal",
+      "raphael-glucksmann"
+     ],
+     "sources": [
+      "psTroisManieres",
+      "psPrimaireGauche"
+     ]
+    },
+    {
+     "texte": "Continuer à former ses soldats, mais arrêter l'aide financière et miser sur la diplomatie",
+     "candidats": [
+      "marine-le-pen"
+     ],
+     "sources": [
+      "psTroisManieres"
+     ]
+    },
+    {
+     "texte": "Chercher la paix par la négociation, et sortir de l'OTAN",
+     "candidats": [
+      "jean-luc-melenchon"
+     ],
+     "sources": [
+      "psTroisManieres"
+     ]
+    },
+    {
+     "texte": "Obtenir vite un cessez-le-feu et réorienter une partie du budget militaire vers les services publics",
+     "candidats": [
+      "fabien-roussel"
+     ],
+     "sources": [
+      "lcpRousselHuma"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "europe",
+   "question": "L'Union européenne, vous la voulez…",
+   "options": [
+    {
+     "texte": "Plus forte : une Europe « puissance », face aux grands continents",
+     "candidats": [
+      "gabriel-attal"
+     ],
+     "sources": [
+      "psTroisManieres"
+     ]
+    },
+    {
+     "texte": "Moins coûteuse : réduire la contribution de la France au budget européen",
+     "candidats": [
+      "marine-le-pen"
+     ],
+     "sources": [
+      "psMedef"
+     ]
+    },
+    {
+     "texte": "Moins contraignante : désobéir aux règles européennes contraires à nos intérêts",
+     "candidats": [
+      "jean-luc-melenchon"
+     ],
+     "sources": [
+      "lcpMedef"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "energie",
+   "question": "Énergie et climat : votre priorité ?",
+   "options": [
+    {
+     "texte": "Tout miser sur le nucléaire et arrêter les éoliennes",
+     "candidats": [
+      "marine-le-pen"
+     ],
+     "sources": [
+      "psLePenEnergie2022"
+     ]
+    },
+    {
+     "texte": "Sortir du gaz et du pétrole : rénovation, solaire made in France et nouveaux réacteurs",
+     "candidats": [
+      "raphael-glucksmann"
+     ],
+     "sources": [
+      "lcpGlucksmann"
+     ]
+    },
+    {
+     "texte": "Un plan climat avec une trajectoire carbone, lié à la réindustrialisation",
+     "candidats": [
+      "fabien-roussel"
+     ],
+     "sources": [
+      "lcpRoussel"
+     ]
+    },
+    {
+     "texte": "L'écologie avant tout, même si elle a un coût pour les entreprises",
+     "candidats": [
+      "marine-tondelier"
+     ],
+     "sources": [
+      "psMedef"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "salaires",
+   "question": "Pouvoir d'achat : comment gagner plus ?",
+   "options": [
+    {
+     "texte": "Porter le SMIC à 2 000 € brut, avec des aides aux PME",
+     "candidats": [
+      "marine-tondelier"
+     ],
+     "sources": [
+      "lcpMedef"
+     ]
+    },
+    {
+     "texte": "Augmenter les salaires pour tout le monde",
+     "candidats": [
+      "jean-luc-melenchon",
+      "fabien-roussel"
+     ],
+     "sources": [
+      "lcpMedef",
+      "lcpRoussel"
+     ]
+    },
+    {
+     "texte": "Alléger les impôts des entreprises et travailler plus",
+     "candidats": [
+      "edouard-philippe"
+     ],
+     "sources": [
+      "psMedef"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "carburants",
+   "question": "Prix des carburants : que faire ?",
+   "options": [
+    {
+     "texte": "Bloquer le prix à 1,70 € le litre et encadrer les marges des pétroliers",
+     "candidats": [
+      "jean-luc-melenchon"
+     ],
+     "sources": [
+      "psTroisManieres"
+     ]
+    },
+    {
+     "texte": "Baisser la TVA sur les carburants",
+     "candidats": [
+      "marine-le-pen"
+     ],
+     "sources": [
+      "psTroisManieres"
+     ]
+    },
+    {
+     "texte": "Imposer à TotalEnergies une baisse des prix, sous peine de nationalisation",
+     "candidats": [
+      "fabien-roussel"
+     ],
+     "sources": [
+      "lcpRousselHuma"
+     ]
+    },
+    {
+     "texte": "Laisser faire le marché",
+     "candidats": [],
+     "sources": []
+    }
+   ]
+  },
+  {
+   "id": "ecole",
+   "question": "École : quelle mesure vous parle le plus ?",
+   "options": [
+    {
+     "texte": "Mieux payer les enseignants et donner plus d'autonomie aux établissements",
+     "candidats": [
+      "edouard-philippe"
+     ],
+     "sources": [
+      "lcpPhilippeEcole"
+     ]
+    },
+    {
+     "texte": "Autre chose, ou aucune de ces priorités",
+     "candidats": [],
+     "sources": []
+    }
+   ]
+  },
+  {
+   "id": "immigration",
+   "question": "Immigration : faut-il expulser les étrangers au chômage depuis longtemps, même en situation régulière ?",
+   "options": [
+    {
+     "texte": "Oui",
+     "candidats": [
+      "eric-zemmour"
+     ],
+     "sources": [
+      "cnewsZemmourRobots"
+     ]
+    },
+    {
+     "texte": "Non",
+     "candidats": [],
+     "sources": []
+    }
+   ]
+  },
+  {
+   "id": "referendum",
+   "question": "Faut-il pouvoir consulter les Français par référendum sur l'immigration, la sécurité ou la justice ?",
+   "options": [
+    {
+     "texte": "Oui, il faut élargir le référendum à ces sujets",
+     "candidats": [
+      "bruno-retailleau"
+     ],
+     "sources": [
+      "psRetailleauConstitution"
+     ]
+    },
+    {
+     "texte": "Non, ces sujets doivent rester au Parlement",
+     "candidats": [],
+     "sources": []
+    }
+   ]
+  },
+  {
+   "id": "droit-europeen",
+   "question": "Sur l'immigration et la sécurité, le droit français doit-il pouvoir primer sur le droit européen ?",
+   "options": [
+    {
+     "texte": "Oui, avec un « bouclier » inscrit dans la Constitution",
+     "candidats": [
+      "bruno-retailleau"
+     ],
+     "sources": [
+      "psRetailleauConstitution"
+     ]
+    },
+    {
+     "texte": "Non, la France doit respecter ses engagements européens",
+     "candidats": [],
+     "sources": []
+    }
+   ]
+  },
+  {
+   "id": "chomage",
+   "question": "Assurance chômage : faut-il limiter l'indemnisation à 12 mois pour les moins de 50 ans ?",
+   "options": [
+    {
+     "texte": "Oui, pour encourager la reprise d'un emploi",
+     "candidats": [
+      "edouard-philippe"
+     ],
+     "sources": [
+      "lcpPhilippeChomage"
+     ]
+    },
+    {
+     "texte": "Non, la durée actuelle doit être conservée",
+     "candidats": [],
+     "sources": []
+    }
+   ]
+  },
+  {
+   "id": "mayotte",
+   "question": "À Mayotte, faut-il suspendre les nouvelles demandes d'asile et geler l'immigration pendant cinq ans ?",
+   "options": [
+    {
+     "texte": "Oui, c'est une urgence",
+     "candidats": [
+      "edouard-philippe"
+     ],
+     "sources": [
+      "lcpPhilippeMayotte"
+     ]
+    },
+    {
+     "texte": "Non, il faut d'autres solutions",
+     "candidats": [],
+     "sources": []
+    }
+   ]
+  },
+  {
+   "id": "heritage",
+   "question": "Faut-il baisser la CSG sur les salaires en augmentant les droits de succession sur les gros héritages ?",
+   "options": [
+    {
+     "texte": "Oui",
+     "candidats": [
+      "raphael-glucksmann"
+     ],
+     "sources": [
+      "lcpMedef"
+     ]
+    },
+    {
+     "texte": "Non",
+     "candidats": [],
+     "sources": []
+    }
+   ]
+  }
+ ]
 }
