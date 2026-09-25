@@ -28,11 +28,21 @@ Mettre à jour `data/data.json` avec l'actualité des dernières 48 heures sur l
 - `positions` : `candidat`, `theme`, `resume` (1 à 2 phrases), `source`. Une entrée par source ; plusieurs entrées possibles pour un même candidat et un même thème.
 - `themes` : ne pas en créer de nouveaux sans nécessité.
 - `syntheses` : texte neutre par grand thème ; à ajuster seulement si le paysage change nettement.
-- `data/quiz-partis.json` (quiz « Quel parti vous correspond ? ») : quand une nouvelle position sourcée correspond clairement à une réponse existante, ajouter l'id du candidat dans `candidats` et la clé de source dans `sources` de cette réponse. Ne jamais y ajouter un candidat sans position sourcée ; ne pas modifier les questions.
+- `data/quiz-partis.json` (quiz « Quel parti vous correspond ? ») : voir la section « Enrichir les quiz » ci-dessous.
 - `calendrier` : `date`, `titre`, `description`, `confirme`, `source`.
 - `majLe` : mettre la date du jour à chaque mise à jour.
 
 Garder le format existant (un objet par ligne) pour des historiques lisibles.
+
+## Enrichir les quiz
+
+- **« Qui a dit ça ? »** se nourrit tout seul des `declarations` : chaque citation exacte ajoutée devient une question. Varier les candidats cités aide le jeu.
+- **« Quel parti ? »** (`data/quiz-partis.json`), à chaque nouvelle position sourcée :
+  1. Si elle correspond clairement à une réponse existante : ajouter l'id du candidat dans `candidats` et la clé de source dans `sources` de cette réponse. Un candidat n'apparaît que dans une seule réponse par question (sauf question déjà construite autrement, comme `ecole`).
+  2. Si elle ne correspond à aucune réponse d'une question existante sur le même sujet : ajouter une réponse (5 au maximum par question), formulée de façon neutre et courte, à partir du résumé sourcé.
+  3. Nouvelle question : seulement quand **au moins 2 candidats de partis différents** ont une position sourcée et différente sur un sujet absent du quiz. Au plus **1 nouvelle question par jour**, et **20 questions au maximum** au total (au-delà, ne plus en ajouter et signaler dans le journal). Format : `id` court et unique, `question` neutre (pas de formulation orientée), 4 réponses (3 minimum, 5 maximum) couvrant l'éventail des positions, dont au moins une nuance ou position intermédiaire ; les réponses sans candidat ont `"candidats": [], "sources": []`.
+- Ne jamais rattacher un candidat à une réponse sans position sourcée dans `data.json`, ni modifier le sens d'une question existante. Dans le doute, ne rien ajouter.
+- `python scripts/valider.py` contrôle aussi le quiz (ids uniques, 3 à 5 réponses, 20 questions au maximum, sources présentes).
 
 ## Déroulé
 

@@ -344,7 +344,7 @@ function main(D) {
           <button class="btn btn-ghost" id="qp-again">Recommencer</button>
         </div>
         <p class="decl-meta" id="qp-copied"></p>
-        <div class="qp-warning">⚠️ <strong>Rappel</strong> : ce quiz est un <strong>divertissement</strong>. Il repose sur 15 questions simplifiées et sur les seules positions que nous avons pu sourcer ; certains partis n'y sont présents que sur 3 ou 4 questions. <strong>Ce n'est ni un sondage ni une consigne de vote</strong> : pour vous faire une idée, lisez les <a href="/programmes.html">programmes complets</a>.</div>
+        <div class="qp-warning">⚠️ <strong>Rappel</strong> : ce quiz est un <strong>divertissement</strong>. Il repose sur ${questions.length} questions simplifiées et sur les seules positions que nous avons pu sourcer ; certains partis n'y sont présents que sur 3 ou 4 questions. <strong>Ce n'est ni un sondage ni une consigne de vote</strong> : pour vous faire une idée, lisez les <a href="/programmes.html">programmes complets</a>.</div>
         <details class="qp-details"><summary>D'où viennent les positions utilisées ?</summary>
           ${questions.map((q) => `<div class="qp-src"><strong>${esc(q.question)}</strong><ul>${q.options.filter((o) => o.candidats.length).map((o) => `<li>${esc(o.texte)} → ${o.candidats.map((cid) => esc(candById(cid)?.parti || cid)).join(", ")} · ${o.sources.map(srcLink).join(", ")}</li>`).join("")}</ul></div>`).join("")}
         </details>`;

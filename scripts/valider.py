@@ -93,8 +93,15 @@ QUIZ = DATA.parent / "quiz-partis.json"
 if QUIZ.exists():
     try:
         Q = json.loads(QUIZ.read_text(encoding="utf-8"))
+        if len(Q["questions"]) > 20: err(f"quiz : {len(Q['questions'])} questions (20 au maximum)")
+        ids = [q["id"] for q in Q["questions"]]
+        for i in set(ids):
+            if ids.count(i) > 1: err(f"quiz : id de question en double {i}")
         for q in Q["questions"]:
+            if not q.get("question"): err(f"quiz {q['id']} : question vide")
+            if not 3 <= len(q["options"]) <= 5: err(f"quiz {q['id']} : {len(q['options'])} réponses (3 à 5 attendues)")
             for o in q["options"]:
+                if not o.get("texte"): err(f"quiz {q['id']} : réponse vide")
                 for cid in o["candidats"]:
                     if cid not in cands: err(f"quiz {q['id']} : candidat inconnu {cid}")
                 for k in o["sources"]:
