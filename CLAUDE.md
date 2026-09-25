@@ -54,5 +54,7 @@ Relire de temps en temps ses ajouts : erreurs déjà vues = citation au discours
 
 ## Mentions légales
 
+Un autre projet sans lien, quiditquoi2027.com (domaine enregistré en juillet 2026, sans marque déposée), porte le même nom : le propriétaire garde le nom. La page `a-propos.html` précise l'absence de lien ; ne jamais renvoyer vers ce site ni reprendre ses contenus.
+
 Éditeur anonyme (LCEN art. 6-III-2), hébergeur Netlify. Page `a-propos.html`.
 Avant d'ajouter de la publicité : mettre à jour la politique de confidentialité et prévoir un bandeau de consentement conforme.
