@@ -1,0 +1,5 @@
+# Chaque mise en ligne en production coûte 15 crédits Netlify (300 par mois en gratuit).
+# Ne pas mettre en ligne quand seuls des fichiers internes ont changé (journal, consignes, scripts).
+# Code de sortie 0 = mise en ligne annulée ; toute erreur = mise en ligne normale.
+[build]
+  ignore = "[ -n \"$CACHED_COMMIT_REF\" ] && git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude)JOURNAL.md' ':(exclude)MISE_A_JOUR.md' ':(exclude)CLAUDE.md' ':(exclude)README.md' ':(exclude)scripts/'"

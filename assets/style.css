@@ -304,3 +304,14 @@ select.chip { appearance: auto; }
   .countdown .num { font-size: 1.5rem; }
   .nav a { padding: 6px 10px; font-size: .9rem; }
 }
+
+/* ===== S'inscrire et voter ===== */
+.vote-alert { border-left: 6px solid var(--brand-2); margin-bottom: 24px; }
+.vote-alert p { margin: 6px 0 0; }
+.vote-steps { list-style: none; padding: 0; margin: 0 0 24px; display: grid; gap: 16px; }
+.vote-steps h2 { margin: 0 0 8px; font-size: 1.25rem; }
+.vote-steps p, .vote-steps ul { margin: 8px 0; }
+
+/* Lettres A, B, C, D devant les réponses des quiz */
+.qp-option:not(.qp-skip) { display: flex; align-items: center; gap: 12px; }
+.qp-letter { flex: none; display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--surface-2); color: var(--brand-1); font-weight: 800; font-size: .9rem; }

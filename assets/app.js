@@ -4,6 +4,10 @@ function main(D) {
   // ---------- Helpers ----------
   const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const $ = (sel) => document.querySelector(sel);
+  // Événement anonyme GoatCounter (sans cookies). Aucune réponse ni résultat politique n'est transmis.
+  const track = (path, title) => { try { window.goatcounter?.count?.({ path, title: title || path, event: true }); } catch (e) { /* statistiques indisponibles */ } };
+  // Clics sur les liens de partage (X, WhatsApp) marqués data-track.
+  document.addEventListener("click", (e) => { const a = e.target.closest("[data-track]"); if (a) track(a.dataset.track); });
   const fmtDate = (iso) => new Date(iso + "T12:00:00").toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
   const candById = (id) => D.candidats.find((c) => c.id === id);
   const themeById = (id) => D.themes.find((t) => t.id === id);
@@ -27,7 +31,8 @@ function main(D) {
     ["/comparateur.html", "Comparateur", "comparateur"],
     ["/qui-a-dit-ca.html", "Qui a dit ça ?", "quiz"],
     ["/quel-parti.html", "Quel parti ?", "quizpartis"],
-    ["/calendrier.html", "Calendrier", "calendrier"]
+    ["/calendrier.html", "Calendrier", "calendrier"],
+    ["/voter.html", "S'inscrire", "voter"]
   ];
 
   function renderLayout() {
@@ -134,6 +139,7 @@ function main(D) {
       questions = shuffle([...pool]).slice(0, Math.min(TOUR, pool.length));
       idx = 0;
       score = 0;
+      track("qui-a-dit-ca/debut", "Qui a dit ça ? : partie commencée");
       ask();
     }
 
@@ -151,7 +157,7 @@ function main(D) {
         <blockquote class="quiz-quote">${esc(d.texte)}</blockquote>
         <p class="decl-meta quiz-when">${fmtDate(d.date)}</p>
         <div class="quiz-choices">
-          ${choix.map((c) => `<button class="quiz-choice" data-id="${esc(c.id)}" style="--c:${esc(c.couleur)}">${avatar(c)}<span>${esc(c.nom)}</span></button>`).join("")}
+          ${choix.map((c, i) => `<button class="quiz-choice" data-id="${esc(c.id)}" style="--c:${esc(c.couleur)}"><span class="qp-letter">${"ABCD"[i]}</span>${avatar(c)}<span>${esc(c.nom)}</span></button>`).join("")}
         </div>
         <div id="quiz-feedback"></div>`;
       $("#quiz").querySelectorAll(".quiz-choice").forEach((b) => b.addEventListener("click", () => answer(b.dataset.id)));
@@ -184,14 +190,15 @@ function main(D) {
       const msg = score === n ? "Sans faute ! Vous suivez la campagne de très près." : score >= n * 0.7 ? "Très bien ! Vous connaissez vos candidats." : score >= n * 0.4 ? "Pas mal, mais la campagne réserve encore des surprises." : "La campagne ne fait que commencer : il est temps de rattraper votre retard !";
       const texte = `J'ai reconnu ${score}/${n} citations de candidats à la présidentielle 2027. Et vous ?`;
       const url = "https://quiditquoi2027.fr/qui-a-dit-ca.html";
+      track(`qui-a-dit-ca/score-${score}-sur-${n}`, `Qui a dit ça ? : partie terminée (${score}/${n})`);
       $("#quiz").innerHTML = `
         <div class="quiz-end">
           <div class="quiz-score">${score}<small>/${n}</small></div>
           <p>${msg}</p>
           <div class="quiz-actions">
             <button class="btn" id="quiz-share">Partager mon score</button>
-            <a class="btn btn-ghost" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(texte)}&url=${encodeURIComponent(url)}" target="_blank" rel="noopener">Partager sur X</a>
-            <a class="btn btn-ghost" href="https://wa.me/?text=${encodeURIComponent(texte + " " + url)}" target="_blank" rel="noopener">WhatsApp</a>
+            <a class="btn btn-ghost" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(texte)}&url=${encodeURIComponent(url)}" target="_blank" rel="noopener" data-track="qui-a-dit-ca/partage-x">Partager sur X</a>
+            <a class="btn btn-ghost" href="https://wa.me/?text=${encodeURIComponent(texte + " " + url)}" target="_blank" rel="noopener" data-track="qui-a-dit-ca/partage-whatsapp">WhatsApp</a>
             <button class="btn btn-ghost" id="quiz-again">Rejouer</button>
           </div>
           <p class="decl-meta" id="quiz-copied"></p>
@@ -200,6 +207,7 @@ function main(D) {
       $("#quiz-again").addEventListener("click", start);
       $("#quiz-share").addEventListener("click", async () => {
         try {
+          track("qui-a-dit-ca/partage", "Qui a dit ça ? : score partagé");
           if (navigator.share) await navigator.share({ title: "Qui a dit ça ?", text: texte, url });
           else { await navigator.clipboard.writeText(texte + " " + url); $("#quiz-copied").textContent = "Texte copié : collez-le où vous voulez !"; }
         } catch (e) { /* partage annulé */ }
@@ -220,6 +228,7 @@ function main(D) {
     function start() {
       idx = 0;
       reponses = [];
+      track("quel-parti/debut", "Quel parti ? : quiz commencé");
       ask();
     }
 
@@ -230,7 +239,7 @@ function main(D) {
         <div class="quiz-bar"><span style="width:${(idx / questions.length) * 100}%"></span></div>
         <h2 class="qp-question">${esc(q.question)}</h2>
         <div class="qp-options">
-          ${q.options.map((o, i) => `<button class="qp-option" data-i="${i}">${esc(o.texte)}</button>`).join("")}
+          ${q.options.map((o, i) => `<button class="qp-option" data-i="${i}"><span class="qp-letter">${"ABCDEFGH"[i]}</span><span>${esc(o.texte)}</span></button>`).join("")}
           <button class="qp-option qp-skip" data-i="-1">Je ne sais pas / sans avis</button>
         </div>`;
       $("#qp").querySelectorAll(".qp-option").forEach((b) => b.addEventListener("click", () => {
@@ -295,6 +304,7 @@ function main(D) {
     function end() {
       const r = scores();
       if (!r.length) {
+        track("quel-parti/sans-resultat", "Quel parti ? : terminé sans résultat (trop de « sans avis »)");
         $("#qp").innerHTML = `<div class="quiz-end"><p>Vous avez répondu « sans avis » à presque tout : impossible de calculer un résultat.</p><button class="btn" id="qp-again">Recommencer</button></div>`;
         $("#qp-again").addEventListener("click", start);
         return;
@@ -302,6 +312,7 @@ function main(D) {
       const top = r[0];
       const texte = `Selon le quiz (pour rire !) de Qui dit quoi 2027, je suis proche à ${top.pct} % de ${top.c.parti}. Et vous ?`;
       const url = "https://quiditquoi2027.fr/quel-parti.html";
+      track("quel-parti/fin", "Quel parti ? : quiz terminé");
       const srcLink = (k) => D.sources[k] ? `<a href="${esc(D.sources[k].url)}" target="_blank" rel="noopener nofollow">${esc(D.sources[k].titre.split(" — ")[0])}</a>` : "";
       $("#qp").innerHTML = `
         <div class="quiz-end">
@@ -328,8 +339,8 @@ function main(D) {
         </div>
         <div class="quiz-actions">
           <button class="btn" id="qp-share">Partager mon résultat</button>
-          <a class="btn btn-ghost" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(texte)}&url=${encodeURIComponent(url)}" target="_blank" rel="noopener">Partager sur X</a>
-          <a class="btn btn-ghost" href="https://wa.me/?text=${encodeURIComponent(texte + " " + url)}" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="btn btn-ghost" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(texte)}&url=${encodeURIComponent(url)}" target="_blank" rel="noopener" data-track="quel-parti/partage-x">Partager sur X</a>
+          <a class="btn btn-ghost" href="https://wa.me/?text=${encodeURIComponent(texte + " " + url)}" target="_blank" rel="noopener" data-track="quel-parti/partage-whatsapp">WhatsApp</a>
           <button class="btn btn-ghost" id="qp-again">Recommencer</button>
         </div>
         <p class="decl-meta" id="qp-copied"></p>
@@ -340,6 +351,7 @@ function main(D) {
       $("#qp-again").addEventListener("click", start);
       $("#qp-share").addEventListener("click", async () => {
         try {
+          track("quel-parti/partage", "Quel parti ? : résultat partagé");
           if (navigator.share) await navigator.share({ title: "Quel parti vous correspond ?", text: texte, url });
           else { await navigator.clipboard.writeText(texte + " " + url); $("#qp-copied").textContent = "Texte copié : collez-le où vous voulez !"; }
         } catch (e) { /* partage annulé */ }
@@ -384,6 +396,7 @@ function main(D) {
       const b = e.target.closest("[data-t]");
       if (!b) return;
       current = b.dataset.t;
+      track("comparateur/theme-" + current, "Comparateur : thème " + current);
       history.replaceState(null, "", "?theme=" + current);
       render();
     });
