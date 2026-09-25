@@ -28,6 +28,7 @@ Mettre à jour `data/data.json` avec l'actualité des dernières 48 heures sur l
 - `positions` : `candidat`, `theme`, `resume` (1 à 2 phrases), `source`. Une entrée par source ; plusieurs entrées possibles pour un même candidat et un même thème.
 - `themes` : ne pas en créer de nouveaux sans nécessité.
 - `syntheses` : texte neutre par grand thème ; à ajuster seulement si le paysage change nettement.
+- `data/quiz-partis.json` (quiz « Quel parti vous correspond ? ») : quand une nouvelle position sourcée correspond clairement à une réponse existante, ajouter l'id du candidat dans `candidats` et la clé de source dans `sources` de cette réponse. Ne jamais y ajouter un candidat sans position sourcée ; ne pas modifier les questions.
 - `calendrier` : `date`, `titre`, `description`, `confirme`, `source`.
 - `majLe` : mettre la date du jour à chaque mise à jour.
 

@@ -26,6 +26,7 @@ function main(D) {
     ["/programmes.html", "Programmes", "programmes"],
     ["/comparateur.html", "Comparateur", "comparateur"],
     ["/qui-a-dit-ca.html", "Qui a dit ça ?", "quiz"],
+    ["/quel-parti.html", "Quel parti ?", "quizpartis"],
     ["/calendrier.html", "Calendrier", "calendrier"]
   ];
 
@@ -209,6 +210,108 @@ function main(D) {
     start();
   }
 
+  async function pageQuizPartis() {
+    let Q;
+    try { Q = await (await fetch("/data/quiz-partis.json", { cache: "no-cache" })).json(); }
+    catch (e) { $("#qp").innerHTML = `<p class="empty">Impossible de charger le quiz.</p>`; return; }
+    const questions = Q.questions;
+    let idx, reponses;
+
+    function start() {
+      idx = 0;
+      reponses = [];
+      ask();
+    }
+
+    function ask() {
+      const q = questions[idx];
+      $("#qp").innerHTML = `
+        <div class="quiz-top"><span>Question ${idx + 1} / ${questions.length}</span><span>${idx ? `<button class="linklike" id="qp-back">← Précédente</button>` : ""}</span></div>
+        <div class="quiz-bar"><span style="width:${(idx / questions.length) * 100}%"></span></div>
+        <h2 class="qp-question">${esc(q.question)}</h2>
+        <div class="qp-options">
+          ${q.options.map((o, i) => `<button class="qp-option" data-i="${i}">${esc(o.texte)}</button>`).join("")}
+          <button class="qp-option qp-skip" data-i="-1">Je ne sais pas / sans avis</button>
+        </div>`;
+      $("#qp").querySelectorAll(".qp-option").forEach((b) => b.addEventListener("click", () => {
+        reponses[idx] = Number(b.dataset.i);
+        idx++;
+        idx < questions.length ? ask() : end();
+      }));
+      if (idx) $("#qp-back").addEventListener("click", () => { idx--; ask(); });
+    }
+
+    function scores() {
+      const res = {};
+      questions.forEach((q, qi) => {
+        const choix = reponses[qi];
+        if (choix === -1 || choix === undefined) return; // sans avis : la question ne compte pas
+        new Set(q.options.flatMap((o) => o.candidats)).forEach((cid) => {
+          res[cid] = res[cid] || { accord: 0, total: 0 };
+          res[cid].total++;
+          if (q.options[choix].candidats.includes(cid)) res[cid].accord++;
+        });
+      });
+      return Object.entries(res)
+        .filter(([cid, r]) => candById(cid) && r.total >= (Q.minQuestions || 2))
+        .map(([cid, r]) => ({ c: candById(cid), pct: Math.round((r.accord / r.total) * 100), ...r }))
+        .sort((a, b) => b.pct - a.pct || b.accord - a.accord);
+    }
+
+    function end() {
+      const r = scores();
+      if (!r.length) {
+        $("#qp").innerHTML = `<div class="quiz-end"><p>Vous avez répondu « sans avis » à presque tout : impossible de calculer un résultat.</p><button class="btn" id="qp-again">Recommencer</button></div>`;
+        $("#qp-again").addEventListener("click", start);
+        return;
+      }
+      const top = r[0];
+      const texte = `Selon le quiz (pour rire !) de Qui dit quoi 2027, je suis proche à ${top.pct} % de ${top.c.parti}. Et vous ?`;
+      const url = "https://quiditquoi2027.fr/quel-parti.html";
+      const srcLink = (k) => D.sources[k] ? `<a href="${esc(D.sources[k].url)}" target="_blank" rel="noopener nofollow">${esc(D.sources[k].titre.split(" — ")[0])}</a>` : "";
+      $("#qp").innerHTML = `
+        <div class="quiz-end">
+          <p class="decl-meta">Votre résultat (pour le fun)</p>
+          <div class="qp-winner" style="--c:${esc(top.c.couleur)}">${avatar(top.c, "lg")}
+            <div><div class="quiz-score">${top.pct}<small> %</small></div><h2>${esc(top.c.parti)}</h2><p>${esc(top.c.nom)}</p></div>
+          </div>
+        </div>
+        <h3>Votre proximité avec chaque parti</h3>
+        <div class="qp-bars">
+          ${r.map((x) => `
+            <a class="qp-bar" href="${candUrl(x.c)}" style="--c:${esc(x.c.couleur)}">
+              ${avatar(x.c)}
+              <div class="qp-bar-body">
+                <div class="qp-bar-label"><strong>${esc(x.c.parti)}</strong> <span class="decl-meta">${esc(x.c.nom)} · ${x.accord}/${x.total} réponses en commun</span></div>
+                <div class="qp-track"><span style="width:${x.pct}%"></span></div>
+              </div>
+              <strong class="qp-pct">${x.pct} %</strong>
+            </a>`).join("")}
+        </div>
+        <div class="quiz-actions">
+          <button class="btn" id="qp-share">Partager mon résultat</button>
+          <a class="btn btn-ghost" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(texte)}&url=${encodeURIComponent(url)}" target="_blank" rel="noopener">Partager sur X</a>
+          <a class="btn btn-ghost" href="https://wa.me/?text=${encodeURIComponent(texte + " " + url)}" target="_blank" rel="noopener">WhatsApp</a>
+          <button class="btn btn-ghost" id="qp-again">Recommencer</button>
+        </div>
+        <p class="decl-meta" id="qp-copied"></p>
+        <div class="qp-warning">⚠️ <strong>Rappel</strong> : ce quiz est un <strong>divertissement</strong>. Il repose sur 10 questions simplifiées et sur les seules positions que nous avons pu sourcer ; certains partis n'y sont présents que sur 2 ou 3 questions. <strong>Ce n'est ni un sondage ni une consigne de vote</strong> : pour vous faire une idée, lisez les <a href="/programmes.html">programmes complets</a>.</div>
+        <details class="qp-details"><summary>D'où viennent les positions utilisées ?</summary>
+          ${questions.map((q) => `<div class="qp-src"><strong>${esc(q.question)}</strong><ul>${q.options.filter((o) => o.candidats.length).map((o) => `<li>${esc(o.texte)} → ${o.candidats.map((cid) => esc(candById(cid)?.parti || cid)).join(", ")} · ${o.sources.map(srcLink).join(", ")}</li>`).join("")}</ul></div>`).join("")}
+        </details>`;
+      $("#qp-again").addEventListener("click", start);
+      $("#qp-share").addEventListener("click", async () => {
+        try {
+          if (navigator.share) await navigator.share({ title: "Quel parti vous correspond ?", text: texte, url });
+          else { await navigator.clipboard.writeText(texte + " " + url); $("#qp-copied").textContent = "Texte copié : collez-le où vous voulez !"; }
+        } catch (e) { /* partage annulé */ }
+      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    start();
+  }
+
   function pageDeclarations() {
     const state = { cand: "", theme: "" };
     $("#f-cand").innerHTML = `<option value="">Tous les candidats</option>` + D.candidats.map((c) => `<option value="${esc(c.id)}">${esc(c.nom)}</option>`).join("");
@@ -288,7 +391,7 @@ function main(D) {
   }
 
   renderLayout();
-  ({ accueil: pageAccueil, candidats: pageCandidats, quiz: pageQuiz, declarations: pageDeclarations, comparateur: pageComparateur, programmes: pageProgrammes, calendrier: pageCalendrier }[page] || (() => {}))();
+  ({ accueil: pageAccueil, candidats: pageCandidats, quiz: pageQuiz, quizpartis: pageQuizPartis, declarations: pageDeclarations, comparateur: pageComparateur, programmes: pageProgrammes, calendrier: pageCalendrier }[page] || (() => {}))();
 }
 
 // Charge data/data.json, remplace les clés de source par l'objet source correspondant, puis affiche la page.

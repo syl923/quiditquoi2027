@@ -89,6 +89,20 @@ for i, e in enumerate(D["calendrier"]):
     if not e.get("titre"): err(f"{w} : titre vide")
     if "source" in e: check_source(w, e)
 
+QUIZ = DATA.parent / "quiz-partis.json"
+if QUIZ.exists():
+    try:
+        Q = json.loads(QUIZ.read_text(encoding="utf-8"))
+        for q in Q["questions"]:
+            for o in q["options"]:
+                for cid in o["candidats"]:
+                    if cid not in cands: err(f"quiz {q['id']} : candidat inconnu {cid}")
+                for k in o["sources"]:
+                    if k not in sources: err(f"quiz {q['id']} : source inconnue {k}")
+                if o["candidats"] and not o["sources"]: err(f"quiz {q['id']} : réponse sans source")
+    except Exception as e:
+        err(f"quiz-partis.json invalide : {e}")
+
 if errs:
     print(f"{len(errs)} erreur(s) :")
     print("\n".join(" - " + e for e in errs))
