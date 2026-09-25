@@ -57,6 +57,12 @@ for c in D["candidats"]:
     if "dateDeclaration" in c:
         check_date(w, c["dateDeclaration"])
     check_source(w, c)
+    if "photo" in c:
+        ph = c["photo"]
+        if not (ph.get("fichier") and ph.get("credit") and ph.get("url")):
+            err(f"{w} : photo incomplète (fichier, credit, url)")
+        elif not (DATA.parent.parent / ph["fichier"]).is_file():
+            err(f"{w} : fichier photo introuvable {ph['fichier']}")
 
 seen = set()
 for i, d in enumerate(D["declarations"]):

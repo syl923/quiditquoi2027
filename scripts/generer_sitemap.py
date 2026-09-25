@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from urllib.parse import quote
 
-BASE = "https://quiditquoi2027.netlify.app"
+BASE = "https://quiditquoi2027.fr"
 ROOT = Path(__file__).resolve().parent.parent
 D = json.loads((ROOT / "data" / "data.json").read_text(encoding="utf-8"))
 maj = D["majLe"]

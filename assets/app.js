@@ -13,7 +13,8 @@ function main(D) {
   const posOf = (cid, tid) => D.positions.filter((p) => p.candidat === cid && p.theme === tid);
   const sourceLink = (src, label = "Source") => `<a class="source-link" href="${esc(src.url)}" target="_blank" rel="noopener nofollow">${label} : ${esc(src.titre)} ↗</a>`;
 
-  const avatar = (c, cls = "") => `<div class="avatar ${cls}" style="--c:${esc(c.couleur)}">${esc(initials(c.nom))}</div>`;
+  const avatar = (c, cls = "") =>
+    `<div class="avatar ${cls}" style="--c:${esc(c.couleur)}">${c.photo ? `<img src="${esc(c.photo.fichier)}" alt="${esc(c.nom)}" loading="lazy">` : esc(initials(c.nom))}</div>`;
   const exempleBadge = (x) => (x.exemple ? `<span class="badge exemple">Exemple</span>` : "");
 
   // ---------- Layout ----------
@@ -146,7 +147,8 @@ function main(D) {
           </div>
         </div>
       </div>
-      <p class="page-intro">${esc(c.bio)}${c.source ? `<br>${sourceLink(c.source)}` : ""}</p>`;
+      <p class="page-intro">${esc(c.bio)}${c.source ? `<br>${sourceLink(c.source)}` : ""}</p>
+      ${c.photo ? `<p class="photo-credit">Photo : <a href="${esc(c.photo.url)}" target="_blank" rel="noopener">${esc(c.photo.credit)}</a>, via Wikimedia Commons</p>` : ""}`;
 
     const pos = D.positions.filter((p) => p.candidat === c.id);
     $("#positions").innerHTML = pos.length
