@@ -14,7 +14,7 @@ Mettre à jour `data/data.json` avec l'actualité des dernières 48 heures sur l
 ## Règles absolues
 
 1. **Aucune information sans source.** Chaque ajout pointe vers un article accessible, publié par un média identifiable (LCP, Public Sénat, Toute l'Europe, RTS, CNews, Wikipédia, sites officiels : vie-publique.fr, conseil-constitutionnel.fr, info.gouv.fr…). Pas de blogs, forums, réseaux sociaux anonymes ni sites agrégateurs inconnus.
-2. **Citations mot pour mot.** Le champ `texte` d'une déclaration reprend exactement les mots entre guillemets de la source. Si la citation exacte n'est pas lisible dans la source, ne pas l'ajouter.
+2. **Citations mot pour mot.** Le champ `texte` d'une déclaration reprend exactement les mots entre guillemets de la source. Si la citation exacte n'est pas lisible dans la source, ne pas l'ajouter. Pas de discours indirect ni de propos rapportés à la troisième personne (« il était hors de question de se mettre derrière… ») : uniquement des phrases prononcées à la première personne, telles quelles.
 3. **Neutralité.** Résumés factuels, sans adjectif de jugement (« choc », « démagogique », « courageux »…). Même traitement pour tous les candidats.
 4. **Ne jamais supprimer** une déclaration ou une position existante, sauf si une source fiable prouve qu'elle est fausse. Dans ce cas, la corriger.
 5. **Doute = on s'abstient.** Information contradictoire entre sources, rumeur, « selon nos informations » non confirmé : ne pas publier.
