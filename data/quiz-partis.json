@@ -120,6 +120,11 @@
      ]
     },
     {
+     "texte": "Être redéployé : moins dans les bureaux, plus sur le terrain (santé, école, sécurité)",
+     "candidats": [],
+     "sources": []
+    },
+    {
      "texte": "Doit être maintenu, voire augmenté dans certains services",
      "candidats": [],
      "sources": []
@@ -200,6 +205,16 @@
      "sources": [
       "lcpMedef"
      ]
+    },
+    {
+     "texte": "Plus protectrice : davantage de règles communes pour le social et l'environnement",
+     "candidats": [],
+     "sources": []
+    },
+    {
+     "texte": "En dehors : la France devrait quitter l'Union européenne",
+     "candidats": [],
+     "sources": []
     }
    ]
   },
@@ -277,6 +292,20 @@
      "sources": [
       "psMedef"
      ]
+    },
+    {
+     "texte": "Baisser la CSG sur les salaires, financée par les gros héritages",
+     "candidats": [
+      "raphael-glucksmann"
+     ],
+     "sources": [
+      "lcpMedef"
+     ]
+    },
+    {
+     "texte": "Augmenter les aides et les primes versées par l'État",
+     "candidats": [],
+     "sources": []
     }
    ]
   },
@@ -315,6 +344,11 @@
      "texte": "Laisser faire le marché",
      "candidats": [],
      "sources": []
+    },
+    {
+     "texte": "Développer les transports en commun et la voiture électrique pour en dépendre moins",
+     "candidats": [],
+     "sources": []
     }
    ]
   },
@@ -323,7 +357,7 @@
    "question": "École : quelle mesure vous parle le plus ?",
    "options": [
     {
-     "texte": "Mieux payer les enseignants et donner plus d'autonomie aux établissements",
+     "texte": "Mieux payer les enseignants (+ 20 % sur le quinquennat)",
      "candidats": [
       "edouard-philippe"
      ],
@@ -332,7 +366,30 @@
      ]
     },
     {
-     "texte": "Autre chose, ou aucune de ces priorités",
+     "texte": "Donner plus d'autonomie aux établissements",
+     "candidats": [
+      "edouard-philippe"
+     ],
+     "sources": [
+      "lcpPhilippeEcole"
+     ]
+    },
+    {
+     "texte": "Sanctionner les parents d'élèves harceleurs ou absentéistes",
+     "candidats": [
+      "edouard-philippe"
+     ],
+     "sources": [
+      "lcpPhilippeEcole"
+     ]
+    },
+    {
+     "texte": "Réduire le nombre d'élèves par classe",
+     "candidats": [],
+     "sources": []
+    },
+    {
+     "texte": "Recentrer l'école sur les savoirs fondamentaux (lire, écrire, compter)",
      "candidats": [],
      "sources": []
     }
@@ -343,7 +400,7 @@
    "question": "Immigration : faut-il expulser les étrangers au chômage depuis longtemps, même en situation régulière ?",
    "options": [
     {
-     "texte": "Oui",
+     "texte": "Oui, même en situation régulière",
      "candidats": [
       "eric-zemmour"
      ],
@@ -352,7 +409,17 @@
      ]
     },
     {
-     "texte": "Non",
+     "texte": "Seulement les étrangers condamnés pour des délits ou des crimes",
+     "candidats": [],
+     "sources": []
+    },
+    {
+     "texte": "Non, mais il faut mieux accompagner leur retour à l'emploi",
+     "candidats": [],
+     "sources": []
+    },
+    {
+     "texte": "Non, un titre de séjour régulier doit être respecté",
      "candidats": [],
      "sources": []
     }
@@ -370,6 +437,16 @@
      "sources": [
       "psRetailleauConstitution"
      ]
+    },
+    {
+     "texte": "Oui, mais seulement à l'initiative des citoyens (référendum d'initiative citoyenne)",
+     "candidats": [],
+     "sources": []
+    },
+    {
+     "texte": "Plutôt des conventions citoyennes, avant un vote du Parlement",
+     "candidats": [],
+     "sources": []
     },
     {
      "texte": "Non, ces sujets doivent rester au Parlement",
@@ -392,6 +469,16 @@
      ]
     },
     {
+     "texte": "Oui, mais en renégociant d'abord les traités avec nos partenaires",
+     "candidats": [],
+     "sources": []
+    },
+    {
+     "texte": "Non, mais il faut changer les règles européennes de l'intérieur",
+     "candidats": [],
+     "sources": []
+    },
+    {
      "texte": "Non, la France doit respecter ses engagements européens",
      "candidats": [],
      "sources": []
@@ -410,6 +497,16 @@
      "sources": [
       "lcpPhilippeChomage"
      ]
+    },
+    {
+     "texte": "Oui, mais seulement quand l'emploi va bien (règles qui varient avec la conjoncture)",
+     "candidats": [],
+     "sources": []
+    },
+    {
+     "texte": "Non, il faut plutôt renforcer l'accompagnement et la formation",
+     "candidats": [],
+     "sources": []
     },
     {
      "texte": "Non, la durée actuelle doit être conservée",
@@ -432,7 +529,17 @@
      ]
     },
     {
-     "texte": "Non, il faut d'autres solutions",
+     "texte": "Oui, mais pour une durée plus courte, avec un plan de développement de l'île",
+     "candidats": [],
+     "sources": []
+    },
+    {
+     "texte": "Non, il faut d'abord renforcer la coopération avec les Comores",
+     "candidats": [],
+     "sources": []
+    },
+    {
+     "texte": "Non, il faut d'autres solutions (moyens publics, services, logement)",
      "candidats": [],
      "sources": []
     }
@@ -452,7 +559,17 @@
      ]
     },
     {
-     "texte": "Non",
+     "texte": "Baisser la CSG, oui, mais en réduisant plutôt les dépenses de l'État",
+     "candidats": [],
+     "sources": []
+    },
+    {
+     "texte": "Taxer davantage les gros héritages, oui, mais sans toucher à la CSG",
+     "candidats": [],
+     "sources": []
+    },
+    {
+     "texte": "Non, aucun des deux",
      "candidats": [],
      "sources": []
     }
