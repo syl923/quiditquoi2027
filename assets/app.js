@@ -127,6 +127,12 @@ function main(D) {
       return;
     }
     document.title = `${c.nom} — Qui dit quoi 2027`;
+    const canon = document.createElement("link");
+    canon.rel = "canonical";
+    canon.href = `${location.origin}/candidat.html?id=${encodeURIComponent(c.id)}`;
+    document.head.appendChild(canon);
+    const desc = document.querySelector('meta[name="description"]');
+    if (desc) desc.content = `${c.nom} (${c.parti}) : déclarations sourcées et positions pour la présidentielle 2027.`;
     $("#profile").innerHTML = `
       <div class="profile" style="--c:${esc(c.couleur)}">
         ${avatar(c, "lg")}

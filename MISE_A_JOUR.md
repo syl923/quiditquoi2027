@@ -40,7 +40,8 @@ Garder le format existant (un objet par ligne) pour des historiques lisibles.
 3. Ouvrir chaque article retenu pour vérifier l'information et recopier les citations exactes.
 4. Modifier `data/data.json`.
 5. Lancer `python scripts/valider.py`. S'il échoue, corriger. S'il échoue encore, annuler les modifications et ne rien publier.
-6. Ajouter une ligne en tête de `JOURNAL.md` : date, résumé des changements (ou « aucun changement »).
-7. Commit avec un message du type `Mise à jour du JJ/MM/AAAA : +2 déclarations, statut de X` puis push sur la branche principale.
+6. Lancer `python scripts/generer_sitemap.py` pour mettre à jour `sitemap.xml` (nouveaux candidats, date).
+7. Ajouter une ligne en tête de `JOURNAL.md` : date, résumé des changements (ou « aucun changement »).
+8. Commit avec un message du type `Mise à jour du JJ/MM/AAAA : +2 déclarations, statut de X` puis push sur la branche principale.
 
 S'il n'y a rien de nouveau et de fiable : ne pas modifier les données, seulement noter « aucun changement » dans le journal.
