@@ -22,7 +22,9 @@
     "cnewsRetailleau": {"titre":"CNews — « Il y aura une sélection naturelle et je serai le candidat de la droite » (13/05/2026)","url":"https://www.cnews.fr/france/2026-05-13/presidentielle-2027-il-y-aura-une-selection-naturelle-et-je-serai-le-candidat-de"},
     "lcpPhilippeChomage": {"titre":"LCP — Édouard Philippe veut abaisser la durée d'indemnisation chômage à douze mois","url":"https://lcp.fr/actualites/chomage-edouard-philippe-veut-abaisser-la-duree-d-indemnisation-a-douze-mois-maximum"},
     "lcpPhilippeEcole": {"titre":"LCP — Ce que propose Édouard Philippe pour l'école","url":"https://lcp.fr/actualites/presidentielle-salaires-des-enseignants-sanctions-pour-les-parents-ce-que-propose"},
-    "lcpTondelierGrenoble": {"titre":"LCP — À Grenoble, Marine Tondelier adresse un message à la gauche","url":"https://lcp.fr/actualites/presidentielle-2027-a-grenoble-l-ecologiste-marine-tondelier-adresse-un-message-a-la"}
+    "lcpTondelierGrenoble": {"titre":"LCP — À Grenoble, Marine Tondelier adresse un message à la gauche","url":"https://lcp.fr/actualites/presidentielle-2027-a-grenoble-l-ecologiste-marine-tondelier-adresse-un-message-a-la"},
+    "wikiBecht": {"titre":"Wikipédia — Olivier Becht (candidature à la présidentielle de 2027)","url":"https://fr.wikipedia.org/wiki/Olivier_Becht"},
+    "lcpPrimaireGaucheOppose": {"titre":"LCP — Primaire de gauche : ce qui oppose Glucksmann, Faure, Royal, Guedj et Maurel (24/09/2026)","url":"https://lcp.fr/actualites/primaire-de-gauche-ce-qui-oppose-glucksmann-faure-royal-guedj-et-maurel-442266"}
   },
   "election": {
     "premierTour": "2027-04-18",
@@ -63,7 +65,8 @@
     {"id":"segolene-royal","nom":"Ségolène Royal","parti":"Primaire socialiste","couleur":"#be185d","statut":"primaire","bio":"Candidate PS en 2007, candidate à la primaire socialiste et de Place publique (9-17 octobre 2026).","source":"lcpListe"},
     {"id":"francois-hollande","nom":"François Hollande","parti":"Parti socialiste","couleur":"#f43f5e","statut":"pressenti","bio":"Ancien président de la République (2012-2017). Décision annoncée pour décembre 2026.","source":"lcpListe"},
     {"id":"bernard-cazeneuve","nom":"Bernard Cazeneuve","parti":"La Convention","couleur":"#9333ea","statut":"pressenti","bio":"Ancien Premier ministre (2016-2017). A présenté son projet présidentiel le 16 juillet 2026, hors primaire.","source":"lcpListe"},
-    {"id":"francois-ruffin","nom":"François Ruffin","parti":"Debout !","couleur":"#ea580c","statut":"pressenti","bio":"Député de la Somme, ancien insoumis. Candidature envisagée à gauche.","source":"teDeclares"}
+    {"id":"francois-ruffin","nom":"François Ruffin","parti":"Debout !","couleur":"#ea580c","statut":"pressenti","bio":"Député de la Somme, ancien insoumis. Candidature envisagée à gauche.","source":"teDeclares"},
+    {"id":"olivier-becht","nom":"Olivier Becht","parti":"Sans étiquette (centre)","couleur":"#0d9488","statut":"declare","dateDeclaration":"2026-09-24","bio":"Député du Haut-Rhin, ancien ministre délégué au Commerce extérieur (2022-2024). A annoncé sa candidature le 24 septembre 2026.","source":"wikiBecht"}
   ],
   "declarations": [
     {"candidat":"eric-zemmour","date":"2026-09-17","theme":"campagne","texte":"Je serai candidat à l'élection présidentielle","contexte":"Interview sur BFMTV","source":"lcpZemmour"},
@@ -79,7 +82,10 @@
     {"candidat":"edouard-philippe","date":"2026-09-16","theme":"social","texte":"une réforme responsable pour tous et juste pour chacun","contexte":"Sur les retraites, rapporté par LCP","source":"lcpRetraites"},
     {"candidat":"bruno-retailleau","date":"2026-05-13","theme":"campagne","texte":"Il y aura une sélection naturelle et je serai le candidat de la droite","contexte":"Rapporté par CNews","source":"cnewsRetailleau"},
     {"candidat":"jean-luc-melenchon","date":"2026-05-03","theme":"campagne","texte":"Oui, je suis candidat","contexte":"Journal de 20 h de TF1","source":"rtsMelenchon"},
-    {"candidat":"jean-luc-melenchon","date":"2026-05-03","theme":"campagne","texte":"Nous c'est carré. Il y a une équipe, un programme, un seul candidat","contexte":"Journal de 20 h de TF1","source":"rtsMelenchon"}
+    {"candidat":"jean-luc-melenchon","date":"2026-05-03","theme":"campagne","texte":"Nous c'est carré. Il y a une équipe, un programme, un seul candidat","contexte":"Journal de 20 h de TF1","source":"rtsMelenchon"},
+    {"candidat":"raphael-glucksmann","date":"2026-09-17","theme":"campagne","texte":"Il n'y aura pas de place pour LFI dans mon gouvernement","contexte":"Alors que s'engage la primaire socialiste et de Place publique, rapporté par LCP","source":"lcpPrimaireGaucheOppose"},
+    {"candidat":"segolene-royal","date":"2026-09-20","theme":"campagne","texte":"il était hors de question, à un quelconque moment de la campagne présidentielle, de se mettre derrière Jean-Luc Mélenchon","contexte":"Rapporté par LCP, dans le cadre de la primaire socialiste et de Place publique","source":"lcpPrimaireGaucheOppose"},
+    {"candidat":"jean-luc-melenchon","date":"2026-09-24","theme":"social","texte":"Les Gilets jaunes, c'est calme à côté de ce qui vous attend","contexte":"Entretien à Playbook Paris, sur la hausse des prix des carburants, rapporté par Public Sénat","source":"psTroisManieres"}
   ],
   "positions": [
     {"candidat":"jean-luc-melenchon","theme":"social","resume":"Retraite à 60 ans avec 40 années de cotisation.","source":"lcpRetraites"},
