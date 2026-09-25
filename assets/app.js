@@ -11,20 +11,22 @@ function main(D) {
   const byDateDesc = (a, b) => b.date.localeCompare(a.date);
   const STATUTS = { declare: "Candidature déclarée", primaire: "En primaire", pressenti: "Pressenti", retire: "Retiré" };
   const posOf = (cid, tid) => D.positions.filter((p) => p.candidat === cid && p.theme === tid);
+  const candUrl = (c) => `/candidats/${encodeURIComponent(c.id)}/`;
   const sourceLink = (src, label = "Source") => `<a class="source-link" href="${esc(src.url)}" target="_blank" rel="noopener nofollow">${label} : ${esc(src.titre)} ↗</a>`;
 
   const avatar = (c, cls = "") =>
-    `<div class="avatar ${cls}" style="--c:${esc(c.couleur)}">${c.photo ? `<img src="${esc(c.photo.fichier)}" alt="${esc(c.nom)}" loading="lazy">` : esc(initials(c.nom))}</div>`;
+    `<div class="avatar ${cls}" style="--c:${esc(c.couleur)}">${c.photo ? `<img src="/${esc(c.photo.fichier)}" alt="${esc(c.nom)}" loading="lazy">` : esc(initials(c.nom))}</div>`;
   const exempleBadge = (x) => (x.exemple ? `<span class="badge exemple">Exemple</span>` : "");
 
   // ---------- Layout ----------
   const NAV = [
-    ["index.html", "Accueil", "accueil"],
-    ["candidats.html", "Candidats", "candidats"],
-    ["declarations.html", "Déclarations", "declarations"],
-    ["programmes.html", "Programmes", "programmes"],
-    ["comparateur.html", "Comparateur", "comparateur"],
-    ["calendrier.html", "Calendrier", "calendrier"]
+    ["/", "Accueil", "accueil"],
+    ["/candidats.html", "Candidats", "candidats"],
+    ["/declarations.html", "Déclarations", "declarations"],
+    ["/programmes.html", "Programmes", "programmes"],
+    ["/comparateur.html", "Comparateur", "comparateur"],
+    ["/qui-a-dit-ca.html", "Qui a dit ça ?", "quiz"],
+    ["/calendrier.html", "Calendrier", "calendrier"]
   ];
 
   function renderLayout() {
@@ -32,9 +34,9 @@ function main(D) {
     $("#site-header").outerHTML = `
       <header class="site-header">
         <div class="container">
-          <a class="logo" href="index.html">Qui dit quoi <span class="logo-badge">2027</span></a>
+          <a class="logo" href="/">Qui dit quoi <span class="logo-badge">2027</span></a>
           <nav class="nav">
-            ${NAV.map(([href, label, id]) => `<a href="${href}" class="${page === id || (page === "candidat" && id === "candidats") ? "active" : ""}">${label}</a>`).join("")}
+            ${NAV.map(([href, label, id]) => `<a href="${href}" class="${page === id || (page === "fiche" && id === "candidats") ? "active" : ""}">${label}</a>`).join("")}
           </nav>
         </div>
       </header>
@@ -44,7 +46,7 @@ function main(D) {
       <footer class="site-footer">
         <div class="container">
           <span>© ${new Date().getFullYear()} Qui dit quoi 2027 — site indépendant, sans affiliation politique.${D.majLe ? ` Données mises à jour le ${fmtDate(D.majLe)}.` : ""}</span>
-          <span><a href="a-propos.html">Méthodologie &amp; mentions</a></span>
+          <span><a href="/a-propos.html">Méthodologie &amp; mentions</a></span>
         </div>
       </footer>`;
   }
@@ -53,7 +55,7 @@ function main(D) {
   function candCard(c) {
     const n = D.declarations.filter((d) => d.candidat === c.id).length;
     return `
-      <a class="card cand-card" href="candidat.html?id=${encodeURIComponent(c.id)}" style="--c:${esc(c.couleur)}">
+      <a class="card cand-card" href="${candUrl(c)}" style="--c:${esc(c.couleur)}">
         ${avatar(c)}
         <h3>${esc(c.nom)}</h3>
         <div class="parti">${esc(c.parti)}</div>
@@ -74,7 +76,7 @@ function main(D) {
         <div class="decl-top">
           ${avatar(c)}
           <div>
-            <a class="decl-who" href="candidat.html?id=${encodeURIComponent(c.id)}">${esc(c.nom)}</a>
+            <a class="decl-who" href="${candUrl(c)}">${esc(c.nom)}</a>
             <div class="decl-meta">${fmtDate(d.date)}${d.contexte ? " · " + esc(d.contexte) : ""}</div>
           </div>
         </div>
@@ -120,46 +122,91 @@ function main(D) {
       .join("");
   }
 
-  function pageCandidat() {
-    const id = new URLSearchParams(location.search).get("id");
-    const c = candById(id);
-    if (!c) {
-      $("#profile").innerHTML = `<p class="empty">Candidat introuvable. <a href="candidats.html">Voir tous les candidats</a></p>`;
-      return;
+
+  function pageQuiz() {
+    const TOUR = 10;
+    const pool = D.declarations.filter((d) => candById(d.candidat));
+    const shuffle = (a) => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+    let questions, idx, score;
+
+    function start() {
+      questions = shuffle([...pool]).slice(0, Math.min(TOUR, pool.length));
+      idx = 0;
+      score = 0;
+      ask();
     }
-    document.title = `${c.nom} — Qui dit quoi 2027`;
-    const canon = document.createElement("link");
-    canon.rel = "canonical";
-    canon.href = `${location.origin}/candidat.html?id=${encodeURIComponent(c.id)}`;
-    document.head.appendChild(canon);
-    const desc = document.querySelector('meta[name="description"]');
-    if (desc) desc.content = `${c.nom} (${c.parti}) : déclarations sourcées et positions pour la présidentielle 2027.`;
-    $("#profile").innerHTML = `
-      <div class="profile" style="--c:${esc(c.couleur)}">
-        ${avatar(c, "lg")}
-        <div>
-          <h1>${esc(c.nom)}</h1>
-          <div class="parti">${esc(c.parti)}</div>
-          <div class="badges">
-            <span class="badge ${esc(c.statut)}">${STATUTS[c.statut] || esc(c.statut)}</span>
-            ${c.dateDeclaration ? `<span class="badge">Déclaré le ${fmtDate(c.dateDeclaration)}</span>` : ""}
-            ${exempleBadge(c)}
-          </div>
+
+    function ask() {
+      const d = questions[idx];
+      const bonne = candById(d.candidat);
+      // Trois intrus, pris de préférence parmi les candidats déclarés ou en primaire.
+      const autres = shuffle(D.candidats.filter((c) => c.id !== bonne.id && c.statut !== "retire"))
+        .sort((a, b) => (a.statut === "pressenti") - (b.statut === "pressenti"))
+        .slice(0, 3);
+      const choix = shuffle([bonne, ...autres]);
+      $("#quiz").innerHTML = `
+        <div class="quiz-top"><span>Citation ${idx + 1} / ${questions.length}</span><span>Score : ${score}</span></div>
+        <div class="quiz-bar"><span style="width:${(idx / questions.length) * 100}%"></span></div>
+        <blockquote class="quiz-quote">${esc(d.texte)}</blockquote>
+        <p class="decl-meta quiz-when">${fmtDate(d.date)}</p>
+        <div class="quiz-choices">
+          ${choix.map((c) => `<button class="quiz-choice" data-id="${esc(c.id)}" style="--c:${esc(c.couleur)}">${avatar(c)}<span>${esc(c.nom)}</span></button>`).join("")}
         </div>
-      </div>
-      <p class="page-intro">${esc(c.bio)}${c.source ? `<br>${sourceLink(c.source)}` : ""}</p>
-      ${c.photo ? `<p class="photo-credit">Photo : <a href="${esc(c.photo.url)}" target="_blank" rel="noopener">${esc(c.photo.credit)}</a>, via Wikimedia Commons</p>` : ""}`;
+        <div id="quiz-feedback"></div>`;
+      $("#quiz").querySelectorAll(".quiz-choice").forEach((b) => b.addEventListener("click", () => answer(b.dataset.id)));
+    }
 
-    const pos = D.positions.filter((p) => p.candidat === c.id);
-    $("#positions").innerHTML = pos.length
-      ? pos.map((p) => {
-          const t = themeById(p.theme);
-          return `<div class="card pos-card" style="--c:${esc(c.couleur)}"><h3 style="margin-top:0">${t ? t.emoji + " " + esc(t.nom) : ""}</h3><p>${esc(p.resume)}</p>${sourceLink(p.source)}</div>`;
-        }).join("")
-      : `<p class="empty">Aucune position renseignée.</p>`;
+    function answer(id) {
+      const d = questions[idx];
+      const bonne = candById(d.candidat);
+      const ok = id === bonne.id;
+      if (ok) score++;
+      $("#quiz").querySelectorAll(".quiz-choice").forEach((b) => {
+        b.disabled = true;
+        if (b.dataset.id === bonne.id) b.classList.add("good");
+        else if (b.dataset.id === id) b.classList.add("bad");
+      });
+      const last = idx === questions.length - 1;
+      $("#quiz-feedback").innerHTML = `
+        <div class="card quiz-answer ${ok ? "ok" : "ko"}">
+          <strong>${ok ? "Bonne réponse !" : `Raté : c'était ${esc(bonne.nom)}.`}</strong>
+          <p class="decl-meta">${esc(d.contexte || "")}</p>
+          ${sourceLink(d.source)}
+          <div><button class="btn" id="quiz-next">${last ? "Voir mon score" : "Citation suivante →"}</button></div>
+        </div>`;
+      $("#quiz-next").addEventListener("click", () => { idx++; last ? end() : ask(); });
+      $("#quiz-next").focus();
+    }
 
-    const decls = D.declarations.filter((d) => d.candidat === c.id).sort(byDateDesc);
-    $("#decls").innerHTML = decls.map(declCard).join("") || `<p class="empty">Aucune déclaration pour l'instant.</p>`;
+    function end() {
+      const n = questions.length;
+      const msg = score === n ? "Sans faute ! Vous suivez la campagne de très près." : score >= n * 0.7 ? "Très bien ! Vous connaissez vos candidats." : score >= n * 0.4 ? "Pas mal, mais la campagne réserve encore des surprises." : "La campagne ne fait que commencer : il est temps de rattraper votre retard !";
+      const texte = `J'ai reconnu ${score}/${n} citations de candidats à la présidentielle 2027. Et vous ?`;
+      const url = "https://quiditquoi2027.fr/qui-a-dit-ca.html";
+      $("#quiz").innerHTML = `
+        <div class="quiz-end">
+          <div class="quiz-score">${score}<small>/${n}</small></div>
+          <p>${msg}</p>
+          <div class="quiz-actions">
+            <button class="btn" id="quiz-share">Partager mon score</button>
+            <a class="btn btn-ghost" href="https://twitter.com/intent/tweet?text=${encodeURIComponent(texte)}&url=${encodeURIComponent(url)}" target="_blank" rel="noopener">Partager sur X</a>
+            <a class="btn btn-ghost" href="https://wa.me/?text=${encodeURIComponent(texte + " " + url)}" target="_blank" rel="noopener">WhatsApp</a>
+            <button class="btn btn-ghost" id="quiz-again">Rejouer</button>
+          </div>
+          <p class="decl-meta" id="quiz-copied"></p>
+          <p><a href="/declarations.html">Voir toutes les déclarations →</a></p>
+        </div>`;
+      $("#quiz-again").addEventListener("click", start);
+      $("#quiz-share").addEventListener("click", async () => {
+        try {
+          if (navigator.share) await navigator.share({ title: "Qui a dit ça ?", text: texte, url });
+          else { await navigator.clipboard.writeText(texte + " " + url); $("#quiz-copied").textContent = "Texte copié : collez-le où vous voulez !"; }
+        } catch (e) { /* partage annulé */ }
+      });
+    }
+
+    if (pool.length < 4) { $("#quiz").innerHTML = `<p class="empty">Pas encore assez de citations pour jouer.</p>`; return; }
+    start();
   }
 
   function pageDeclarations() {
@@ -231,7 +278,7 @@ function main(D) {
       <thead><tr><th>Candidat</th>${themes.map((t) => `<th>${t.emoji} ${esc(t.nom)}</th>`).join("")}</tr></thead>
       <tbody>${cands.map((c) => `
         <tr style="--c:${esc(c.couleur)}">
-          <th scope="row"><a class="prog-cand" href="candidat.html?id=${encodeURIComponent(c.id)}">${avatar(c)}<span><strong>${esc(c.nom)}</strong><small>${esc(c.parti)}</small></span></a></th>
+          <th scope="row"><a class="prog-cand" href="${candUrl(c)}">${avatar(c)}<span><strong>${esc(c.nom)}</strong><small>${esc(c.parti)}</small></span></a></th>
           ${themes.map((t) => {
             const ps = posOf(c.id, t.id);
             return `<td>${ps.length ? `<ul>${ps.map((p) => `<li>${esc(p.resume)} <a class="src" href="${esc(p.source.url)}" target="_blank" rel="noopener nofollow" title="${esc(p.source.titre)}">[source]</a></li>`).join("")}</ul>` : `<span class="pos-empty">Pas encore de position sourcée</span>`}</td>`;
@@ -241,11 +288,11 @@ function main(D) {
   }
 
   renderLayout();
-  ({ accueil: pageAccueil, candidats: pageCandidats, candidat: pageCandidat, declarations: pageDeclarations, comparateur: pageComparateur, programmes: pageProgrammes, calendrier: pageCalendrier }[page] || (() => {}))();
+  ({ accueil: pageAccueil, candidats: pageCandidats, quiz: pageQuiz, declarations: pageDeclarations, comparateur: pageComparateur, programmes: pageProgrammes, calendrier: pageCalendrier }[page] || (() => {}))();
 }
 
 // Charge data/data.json, remplace les clés de source par l'objet source correspondant, puis affiche la page.
-fetch("data/data.json", { cache: "no-cache" })
+fetch("/data/data.json", { cache: "no-cache" })
   .then((r) => r.json())
   .then((D) => {
     const resolve = (x) => { if (x && typeof x.source === "string") x.source = D.sources[x.source] || { titre: "Source inconnue", url: "#" }; };

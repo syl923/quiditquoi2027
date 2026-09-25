@@ -41,7 +41,7 @@ Garder le format existant (un objet par ligne) pour des historiques lisibles.
 4. Modifier `data/data.json`.
 5. Lancer `python scripts/valider.py`. S'il échoue, corriger. S'il échoue encore, annuler les modifications et ne rien publier.
 6. Lancer `python scripts/photos.py` : ajoute une photo sous licence libre (Wikimedia Commons, avec crédit) aux nouveaux candidats. Ne jamais ajouter de photo à la main depuis un autre site (droits d'auteur). S'il échoue (réseau), continuer sans photo.
-7. Lancer `python scripts/generer_sitemap.py` pour mettre à jour `sitemap.xml` (nouveaux candidats, date).
+7. Lancer `python scripts/generer_pages.py` (régénère les pages `candidats/<id>/`) puis `python scripts/generer_sitemap.py` pour mettre à jour `sitemap.xml` (nouveaux candidats, date).
 8. Ajouter une ligne en tête de `JOURNAL.md` : date, résumé des changements (ou « aucun changement »).
 9. Commit avec un message du type `Mise à jour du JJ/MM/AAAA : +2 déclarations, statut de X` puis push sur la branche principale.
 

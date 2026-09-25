@@ -25,7 +25,9 @@ L'historique des mises à jour est tenu dans [JOURNAL.md](JOURNAL.md).
 | Fichier | Rôle |
 |---|---|
 | `index.html` | Accueil : compte à rebours, dernières déclarations, candidats déclarés |
-| `candidats.html` / `candidat.html?id=…` | Liste et fiche candidat |
+| `candidats.html` | Liste des candidats |
+| `candidats/<id>/` | Fiches candidats statiques (générées par `scripts/generer_pages.py`, ne pas modifier à la main) |
+| `qui-a-dit-ca.html` | Jeu « Qui a dit ça ? » |
 | `declarations.html` | Toutes les déclarations, filtrables |
 | `programmes.html` | Synthèse et tableau des programmes par grand thème |
 | `comparateur.html` | Positions côte à côte, thème par thème |
@@ -33,3 +35,6 @@ L'historique des mises à jour est tenu dans [JOURNAL.md](JOURNAL.md).
 | `a-propos.html` | Méthodologie, mentions légales (à compléter) |
 | `assets/app.js`, `assets/style.css` | Code et style partagés |
 | `scripts/valider.py` | Contrôle de cohérence des données |
+| `scripts/photos.py` | Photos libres (Wikimedia Commons) des candidats |
+| `scripts/generer_pages.py`, `scripts/generer_sitemap.py` | Pages candidats et plan du site |
+| `_redirects` | Redirections Netlify (anciennes adresses) |
