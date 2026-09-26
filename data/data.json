@@ -1,5 +1,5 @@
 {
-  "majLe": "2026-09-25",
+  "majLe": "2026-09-26",
   "sources": {
     "lcpListe": {"titre":"LCP — La liste des candidats déjà en lice et des prétendants","url":"https://lcp.fr/actualites/presidentielle-2027-la-liste-des-candidats-deja-en-lice-et-des-pretendants-436373"},
     "teDeclares": {"titre":"Toute l'Europe — Qui sont les principaux candidats déjà déclarés ?","url":"https://www.touteleurope.eu/vie-politique-des-etats-membres/presidentielle-2027-qui-sont-les-candidats-deja-declares/"},
@@ -27,6 +27,9 @@
     "lcpPrimaireGaucheOppose": {"titre":"LCP — Primaire de gauche : ce qui oppose Glucksmann, Faure, Royal, Guedj et Maurel (24/09/2026)","url":"https://lcp.fr/actualites/primaire-de-gauche-ce-qui-oppose-glucksmann-faure-royal-guedj-et-maurel-442266"},
     "lcpRousselHuma": {"titre":"LCP — À la Fête de l'Huma, Fabien Roussel au défi de prouver l'utilité d'une candidature communiste (11/09/2026)","url":"https://lcp.fr/actualites/presidentielle-a-la-fete-de-l-huma-fabien-roussel-au-defi-de-prouver-l-utilite-d-une"},
     "psRetailleauConstitution": {"titre":"Public Sénat — Bruno Retailleau veut « renverser la table » avec une profonde réforme constitutionnelle (03/09/2026)","url":"https://www.publicsenat.fr/actualites/politique/presidentielle-2027-bruno-retailleau-veut-renverser-la-table-avec-une-profonde-reforme-constitutionnelle"},
+    "psReunionElysee": {"titre":"Public Sénat — Crise internationale : les réactions des chefs de partis et des candidats à la sortie de la réunion avec Emmanuel Macron (18/09/2026)","url":"https://www.publicsenat.fr/actualites/politique/crise-internationale-suivez-la-prise-de-parole-demmanuel-macron"},
+    "lcpMelenchonProgramme": {"titre":"LCP — Le programme remanié de la « Nouvelle France » de Jean-Luc Mélenchon sera présenté début novembre (23/09/2026)","url":"https://lcp.fr/actualites/presidentielle-le-programme-remanie-de-la-nouvelle-france-de-jean-luc-melenchon-sera"},
+    "lcpEcologistesVote": {"titre":"LCP — Candidature à la présidentielle : pas de choix définitif des Écologistes avant la mi-décembre (21/09/2026)","url":"https://lcp.fr/actualites/candidature-a-la-presidentielle-pas-de-choix-definitif-des-ecologistes-avant-la-mi"},
     "lcpPhilippeMayotte": {"titre":"LCP — Mayotte : pour Édouard Philippe, « l'urgence est de fermer les vannes de l'immigration » (20/08/2026)","url":"https://lcp.fr/actualites/mayotte-pour-edouard-philippe-l-urgence-est-de-fermer-les-vannes-de-l-immigration-440519"}
   },
   "election": {
@@ -72,6 +75,10 @@
     {"id":"olivier-becht","nom":"Olivier Becht","parti":"Sans étiquette (groupe EPR)","couleur":"#0d9488","statut":"declare","dateDeclaration":"2026-09-24","bio":"Député du Haut-Rhin, ancien ministre délégué au Commerce extérieur (2022-2024). A annoncé sa candidature le 24 septembre 2026.","source":"wikiBecht","photo":{"fichier":"assets/photos/olivier-becht.jpg","credit":"Dominique Giannelli — CC BY 4.0","url":"https://commons.wikimedia.org/wiki/File:Olivier_Becht_en_2026_(cropped).png"}}
   ],
   "declarations": [
+    {"candidat":"raphael-glucksmann","date":"2026-09-18","theme":"international","texte":"Nous nous trouvons dans une situation de guerre hybride. Le terme de terrorisme d'Etat a été utilisé","contexte":"À la sortie de la réunion sur la crise internationale à l'Élysée, rapporté par Public Sénat","source":"psReunionElysee"},
+    {"candidat":"marine-tondelier","date":"2026-09-18","theme":"international","texte":"Nous avons des raisons d'être inquiets, et beaucoup plus que ne le pensent certains","contexte":"À la sortie de la réunion sur la crise internationale à l'Élysée, rapporté par Public Sénat","source":"psReunionElysee"},
+    {"candidat":"edouard-philippe","date":"2026-09-18","theme":"international","texte":"J'ai été frappé par le ton du président","contexte":"À la sortie de la réunion sur la crise internationale à l'Élysée, rapporté par Public Sénat","source":"psReunionElysee"},
+    {"candidat":"bruno-retailleau","date":"2026-09-18","theme":"international","texte":"Ces réunions sont quand même intéressantes. Ça permet d'avoir des échanges, parfois d'avoir telle ou telle information","contexte":"À la sortie de la réunion sur la crise internationale à l'Élysée, rapporté par Public Sénat","source":"psReunionElysee"},
     {"candidat":"eric-zemmour","date":"2026-09-17","theme":"campagne","texte":"Je serai candidat à l'élection présidentielle","contexte":"Interview sur BFMTV","source":"lcpZemmour"},
     {"candidat":"fabien-roussel","date":"2026-09-06","theme":"finances","texte":"Il faut arrêter de nous mettre un pistolet sur la tempe","contexte":"Après sa désignation par les adhérents du PCF, sur les économies budgétaires","source":"lcpRoussel"},
     {"candidat":"fabien-roussel","date":"2026-09-06","theme":"ecologie","texte":"Nous sommes les seuls à avoir un plan climat qui donne une trajectoire carbone","contexte":"Après sa désignation par les adhérents du PCF","source":"lcpRoussel"},
@@ -133,6 +140,8 @@
   "calendrier": [
     {"date":"2026-08-27","titre":"Premier débat entre candidats","description":"Sept candidats débattent devant le Medef, à Roland-Garros.","confirme":true,"source":"psMedef"},
     {"date":"2026-10-09","titre":"Primaire socialiste et Place publique","description":"Du 9 au 17 octobre 2026 : Faure, Glucksmann, Guedj, Maurel et Royal.","confirme":true,"source":"teDeclares"},
+    {"date":"2026-11-07","titre":"Présentation du programme de Jean-Luc Mélenchon","description":"Les 6 et 7 novembre : présentation de la nouvelle version de « L'Avenir en commun », avec une convention au Bourget le 7 novembre.","confirme":true,"source":"lcpMelenchonProgramme"},
+    {"date":"2026-12-13","titre":"Vote des adhérents des Écologistes","description":"Du 10 au 13 décembre : les adhérents choisissent entre la candidature de Marine Tondelier et le ralliement à un candidat d'une autre formation de gauche.","confirme":true,"source":"lcpEcologistesVote"},
     {"date":"2027-01-01","titre":"Nouvelles règles contre la désinformation","description":"Le juge peut faire cesser la diffusion massive et automatisée de fausses informations.","confirme":true,"source":"teCalendrier"},
     {"date":"2027-02-07","titre":"Date limite du décret de convocation","description":"Il déclenche l'envoi des formulaires de parrainage aux élus.","confirme":true,"source":"teCalendrier"},
     {"date":"2027-03-12","titre":"Fin des inscriptions et des parrainages","description":"Dernier jour pour s'inscrire sur les listes électorales. Les candidats doivent avoir déposé 500 parrainages (30 départements minimum) avant 18 h.","confirme":true,"source":"teCalendrier"},
